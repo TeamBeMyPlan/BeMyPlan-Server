@@ -42,6 +42,23 @@ github flow 사용
 
 [airbnb-javascript-guide](https://github.com/airbnb/javascript)
 
+### folding project / 프로젝트 폴더링
+
+```
+bemyplan_server
+|
+|- .github
+|
+|- functions
+      |
+      |- api
+          |- routes
+      |- config
+      |- constants
+      |- lib
+      |- db
+```
+
 ### Developers
 
 |이름|GitHub|
