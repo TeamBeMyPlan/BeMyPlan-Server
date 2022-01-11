@@ -1,21 +1,29 @@
 name: Firebase function deploy
 
 on:
-  pull_request:
+  push:
     branches: [ main ]
 
 jobs:
-  build:
+  deploy-firebase:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - name: create-json
+        id: create-json
+        uses: jsdaniell/create-json@1.1.2
+        with:
+          name: "config.json"
+          json: ${{ secrets.CONFIG_JSON }}
+          dir: 'functions/'
 
       - name: Install npm packages
         run: |
           cd functions
           npm install
 
-      - name:  Deploy to Firebase
+      - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only functions
