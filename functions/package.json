@@ -10,7 +10,7 @@
     "logs": "firebase functions:log"
   },
   "engines": {
-    "node": "16"
+    "node": "14"
   },
   "main": "index.js",
   "dependencies": {
@@ -25,11 +25,14 @@
     "firebase": "^9.6.2",
     "firebase-admin": "^9.8.0",
     "firebase-functions": "^3.14.1",
+    "firebase-tools": "^10.0.1",
     "helmet": "^5.0.1",
     "hpp": "^0.2.3",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
-    "pg": "^8.7.1"
+    "pg": "^8.7.1",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.13.0"
   },
   "devDependencies": {
     "eslint": "^7.6.0",
