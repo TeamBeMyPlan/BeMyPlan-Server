@@ -7,7 +7,7 @@
 > 프로젝트 기간: 2022.01.02 ~ 2022.01.22
 
 ### ERD
-![비마플 ERD](https://user-images.githubusercontent.com/81547780/148635017-d102ae43-6693-4998-9774-836258850923.PNG)
+![image](https://user-images.githubusercontent.com/81547780/148912777-6f990228-f369-47e5-905a-d0064bdaabd7.png)
 
 ### Development Environment   
 <img src="https://img.shields.io/badge/Node.js-v16-green"/> <img src="https://img.shields.io/badge/PostgreSQL-v12.5-blue"/> <img src="https://img.shields.io/badge/Express-v4.17.2-green"/> <img src="https://img.shields.io/badge/Javascript-es6-yellow"/> <img src="https://img.shields.io/badge/firebase-yellow"/>   
