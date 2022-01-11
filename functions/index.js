@@ -1,13 +1,15 @@
 const admin = require("firebase-admin");
-const serviceAccount = require("./wesopt29-328c5-firebase-adminsdk-lppnh-b4d0354e59.json");
+const serviceAccount = require("./config.json");
 const dotenv = require("dotenv");
 
 // import connectDB from './loaders/connect';
-const connectDB = require('./loaders/connect');
+const sequalize = require('./loaders/sequelize');
 
 dotenv.config();
 
-connectDB();
+sequalize.authenticate()
+    .then(() => console.log('Database connected...'))
+    .catch(err => console.log('Error: ' + err))
 
 let firebase;
 if (admin.apps.length === 0) {

@@ -1,15 +1,6 @@
-const { Sequelize } = require('sequelize');
-const dbConfig = require('../config/dbConfig');
+const Sequelize = require('sequelize');
+const dotenv = require('dotenv');
 
-const sequelize = new Sequelize(
-  dbConfig.database,
-  dbConfig.username,
-  dbConfig.password,
-  {
-  host: dbConfig.host,
-  dialect: 'postgres',
-  logging: true
-  }
-);
+dotenv.config();
 
-module.exports = { sequelize, };
+module.exports = new Sequelize('postgres://postgres:dlwpwns0625@db-sopt-server.cqswmyfj82vm.ap-northeast-2.rds.amazonaws.com:5432/postgres')
