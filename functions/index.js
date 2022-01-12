@@ -2,7 +2,10 @@ const admin = require("firebase-admin");
 const serviceAccount = require("./config.json");
 const dotenv = require("dotenv");
 
+const connectDB = require('./loaders/connect');
+
 dotenv.config();
+connectDB();
 
 let firebase;
 if (admin.apps.length === 0) {

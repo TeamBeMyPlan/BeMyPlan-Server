@@ -1,4 +1,3 @@
-
 const functions = require('firebase-functions');
 const { Pool, Query } = require('pg');
 const dayjs = require('dayjs');
