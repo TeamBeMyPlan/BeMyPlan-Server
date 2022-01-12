@@ -6,6 +6,17 @@
 >
 > 프로젝트 기간: 2022.01.02 ~ 2022.01.22
 
+### API DOCS
+[be-my-plan-api-docs](https://wood-sandpaper-707.notion.site/API-bca655150dce4eb8bed070a4cad8c3df)
+
+<details>
+      <summary><i>API 구현 진척도</i></summary>
+      <div markdown="1">
+            인기/최신/추천 여행일정 조회 => 완료!</br>
+      현재 <b>여행지 선택 조회, 여행지 여행일정 조회</b> 진행중
+      </div>
+</details>
+
 ### ERD
 ![image](https://user-images.githubusercontent.com/81547780/148912777-6f990228-f369-47e5-905a-d0064bdaabd7.png)
 
