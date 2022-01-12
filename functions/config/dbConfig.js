@@ -2,8 +2,9 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 module.exports = {
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_DB,
+  // database connection
+  username: process.env.DB_USERNAME || 'root',
   password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  host: process.env.DB_HOST,
 };
