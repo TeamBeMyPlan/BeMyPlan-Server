@@ -21,13 +21,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use("/", require("./routes"));
+app.use("/v1", require("./routes"));
 
 app.use("*", (req, res) => {
   res.status(404).json({
-    status: 404,
-    success: false,
-    message: "잘못된 경로입니다.",
+    statusCode: 404,
+    message: "존재하지 않는 경로입니다.",
   });
 });
 
