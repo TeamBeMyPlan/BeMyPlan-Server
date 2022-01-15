@@ -21,7 +21,17 @@ const retrieveLatestPosts = async (req, res) => {
   }
 };
 
+const retrieveRecommendationPosts = async (req, res) => {
+  try {
+    return res.status(statusCode.OK).json(util.success(await postService.retrieveRecommendationPosts()));
+  } catch (e) {
+    console.log(e);
+    return res.status(statusCode.BAD_REQUEST).json(util.fail(statusCode.BAD_REQUEST, responseMessage.VALIDATION_EXCEPTION));
+  }
+};
+
 module.exports = {
   retrievePopularPosts,
   retrieveLatestPosts,
+  retrieveRecommendationPosts,
 };
