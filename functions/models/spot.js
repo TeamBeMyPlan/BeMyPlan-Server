@@ -1,59 +1,62 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../loaders/sequelize');
 
-const spot = sequelize.define('spot', {
+const spot = sequelize.define(
+  'spot',
+  {
     id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
     },
     title: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     description: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     address: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     latitude: {
-        type: DataTypes.DOUBLE,
-        allowNull: false
+      type: DataTypes.DOUBLE,
+      allowNull: false,
     },
     longitude: {
-        type: DataTypes.DOUBLE,
-        allowNull: false
+      type: DataTypes.DOUBLE,
+      allowNull: false,
     },
     day: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     sequence: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     next_spot_name: {
-        type: DataTypes.STRING,
+      type: DataTypes.STRING,
     },
     next_spot_required_time: {
-        type: DataTypes.STRING,
+      type: DataTypes.STRING,
     },
     next_spot_mobility: {
-        type: DataTypes.STRING,
+      type: DataTypes.STRING,
     },
-}, {
+  },
+  {
     sequelize,
     modelName: 'spot',
     freezeTableName: true,
     underscored: true,
     charset: 'utf8',
-    collate: "utf8_general_ci",
+    collate: 'utf8_general_ci',
     timestamps: true,
     paranoid: true,
-    deletedAt: 'is_deleted'
-});
+  },
+);
 
 module.exports = spot;
