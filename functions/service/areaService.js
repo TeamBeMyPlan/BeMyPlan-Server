@@ -1,7 +1,7 @@
 const db = require('../models');
 const { Op } = require('sequelize');
 
-const retrieveAreaAllPost = async () => {
+const getAllAreas = async () => {
   let areas = await db.area.findAll({
     where: {
       deletedAt: null,
@@ -21,5 +21,5 @@ const retrieveAreaAllPost = async () => {
 };
 
 module.exports = {
-  retrieveAreaAllPost,
+  getAllAreas,
 };
