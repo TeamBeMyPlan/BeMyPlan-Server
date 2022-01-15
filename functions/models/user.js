@@ -1,34 +1,37 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../loaders/sequelize');
 
-const user = sequelize.define('user', {
+const user = sequelize.define(
+  'user',
+  {
     id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
     },
     nickname: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     social_type: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     social_token: {
-        type: DataTypes.STRING,
-        allowNull: false
-    }
-}, {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  {
     sequelize,
     modelName: 'user',
     freezeTableName: true,
     underscored: true,
     charset: 'utf8',
-    collate: "utf8_general_ci",
+    collate: 'utf8_general_ci',
     timestamps: true,
     paranoid: true,
-    deletedAt: 'is_deleted'
-});
+  },
+);
 
 module.exports = user;
