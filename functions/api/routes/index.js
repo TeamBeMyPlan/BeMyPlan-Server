@@ -4,5 +4,5 @@ const postApi = require('./postApi');
 const areaApi = require('./areaApi');
 
 router.use('/post', postApi);
-router.use('/', areaApi);
+router.use('/area', areaApi);
 module.exports = router;

@@ -3,6 +3,6 @@ const router = express.Router();
 
 const { areacontroller } = require('../../controller');
 
-router.get('/area', areacontroller.retrieveAreaAllPost);
+router.get('/', areacontroller.retrieveAreaAllPost);
 
 module.exports = router;
