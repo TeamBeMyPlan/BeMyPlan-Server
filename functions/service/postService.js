@@ -3,7 +3,7 @@ const db = require('../models');
 const retrievePopularPosts = async () => {
   let posts = await db.post.findAll({
     where: {
-      is_deleted: null,
+      deletedAt: null,
     },
     order: [['order_count', 'DESC']],
     limit: 10,
@@ -23,7 +23,7 @@ const retrievePopularPosts = async () => {
 const retrieveLatestPosts = async () => {
   let posts = await db.post.findAll({
     where: {
-      is_deleted: null,
+      deletedAt: null,
     },
     order: [['created_at', 'DESC']],
     limit: 5,
