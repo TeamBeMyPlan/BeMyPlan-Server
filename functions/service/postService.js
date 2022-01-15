@@ -40,6 +40,5 @@ const retrieveLatestPosts = async () => {
 };
 
 module.exports = {
-  retrievePopularPosts,
-  retrieveLatestPosts,
-};
+    retrievePopularPosts,
+}
