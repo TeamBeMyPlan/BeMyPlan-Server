@@ -1,7 +1,7 @@
 const postController = require('./postController');
-const areacontroller = require('./areaController');
+const areaController = require('./areaController');
 
 module.exports = {
   postController,
-  areacontroller,
+  areaController,
 };

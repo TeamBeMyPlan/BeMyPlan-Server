@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const { areacontroller } = require('../../controller');
+const { areaController } = require('../../controller');
 
-router.get('/', areacontroller.getAllAreas);
+router.get('/', areaController.getAllAreas);
+router.get('/:areaId', areaController.getAllPostsByArea);
 
 module.exports = router;

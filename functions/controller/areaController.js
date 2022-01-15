@@ -12,6 +12,19 @@ const getAllAreas = async (req, res) => {
   }
 };
 
+const getAllPostsByArea = async (req, res) => {
+  try {
+    const { areaId } = req.params;
+    const { page, pageSize, sort } = req.query;
+
+    return res.status(statusCode.OK).json(util.success(await areaService.getAllPostsByArea(areaId, page, pageSize, sort)));
+  } catch (e) {
+    console.log(e);
+    return res.status(statusCode.BAD_REQUEST).json(util.fail(statusCode.BAD_REQUEST, responseMessage.VALIDATION_EXCEPTION));
+  }
+}
+
 module.exports = {
   getAllAreas,
+  getAllPostsByArea
 };
