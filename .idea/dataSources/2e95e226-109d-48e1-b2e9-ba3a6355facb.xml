@@ -812,7 +812,7 @@ false posixrules
 14014||-9223372036854775808|U|G
 14014||10|U|G</Grants>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>17651</IntrospectionStateNumber>
+      <IntrospectionStateNumber>17908</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|16803|16805|1
 sequence|table|16814|16816|1
@@ -934,7 +934,7 @@ default_transaction_read_only=off</Config>
       <Comment>standard public schema</Comment>
       <StateNumber>529</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>17652</IntrospectionStateNumber>
+      <IntrospectionStateNumber>17909</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="25" parent="2" name="plpgsql">
@@ -1154,10 +1154,10 @@ default_transaction_read_only=off</Config>
       <StateNumber>17645</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="57" parent="44" name="is_deleted">
+    <column id="57" parent="44" name="deleted_at">
       <Position>7</Position>
       <DataType>timestamp with time zone|0s</DataType>
-      <StateNumber>17645</StateNumber>
+      <StateNumber>17837</StateNumber>
       <TypeId>1184</TypeId>
     </column>
     <index id="58" parent="44" name="area_pkey">
@@ -1199,10 +1199,10 @@ default_transaction_read_only=off</Config>
       <StateNumber>17649</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="63" parent="45" name="is_deleted">
+    <column id="63" parent="45" name="deleted_at">
       <Position>4</Position>
       <DataType>timestamp with time zone|0s</DataType>
-      <StateNumber>17649</StateNumber>
+      <StateNumber>17841</StateNumber>
       <TypeId>1184</TypeId>
     </column>
     <column id="64" parent="45" name="user_id">
@@ -1401,10 +1401,10 @@ post_id</ColNames>
       <StateNumber>17646</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="90" parent="46" name="is_deleted">
+    <column id="90" parent="46" name="deleted_at">
       <Position>19</Position>
       <DataType>timestamp with time zone|0s</DataType>
-      <StateNumber>17646</StateNumber>
+      <StateNumber>17833</StateNumber>
       <TypeId>1184</TypeId>
     </column>
     <column id="91" parent="46" name="author_id">
@@ -1482,10 +1482,10 @@ post_id</ColNames>
       <StateNumber>17650</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="100" parent="47" name="is_deleted">
+    <column id="100" parent="47" name="deleted_at">
       <Position>4</Position>
       <DataType>timestamp with time zone|0s</DataType>
-      <StateNumber>17650</StateNumber>
+      <StateNumber>17845</StateNumber>
       <TypeId>1184</TypeId>
     </column>
     <column id="101" parent="47" name="user_id">
@@ -1647,10 +1647,10 @@ post_id</ColNames>
       <StateNumber>17647</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="122" parent="48" name="is_deleted">
+    <column id="122" parent="48" name="deleted_at">
       <Position>14</Position>
       <DataType>timestamp with time zone|0s</DataType>
-      <StateNumber>17647</StateNumber>
+      <StateNumber>17854</StateNumber>
       <TypeId>1184</TypeId>
     </column>
     <column id="123" parent="48" name="post_id">
@@ -1717,10 +1717,10 @@ post_id</ColNames>
       <StateNumber>17648</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="131" parent="49" name="is_deleted">
+    <column id="131" parent="49" name="deleted_at">
       <Position>5</Position>
       <DataType>timestamp with time zone|0s</DataType>
-      <StateNumber>17648</StateNumber>
+      <StateNumber>17849</StateNumber>
       <TypeId>1184</TypeId>
     </column>
     <column id="132" parent="49" name="spot_id">
@@ -1801,10 +1801,10 @@ post_id</ColNames>
       <StateNumber>17644</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="142" parent="50" name="is_deleted">
+    <column id="142" parent="50" name="deleted_at">
       <Position>7</Position>
       <DataType>timestamp with time zone|0s</DataType>
-      <StateNumber>17644</StateNumber>
+      <StateNumber>17858</StateNumber>
       <TypeId>1184</TypeId>
     </column>
     <index id="143" parent="50" name="user_pkey">
