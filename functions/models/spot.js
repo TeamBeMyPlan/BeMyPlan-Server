@@ -46,6 +46,10 @@ const spot = sequelize.define(
     next_spot_mobility: {
       type: DataTypes.STRING,
     },
+    is_preview: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   },
   {
     sequelize,
