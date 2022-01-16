@@ -4,7 +4,7 @@ const { Op } = require('sequelize');
 const retrievePopularPosts = async () => {
     let posts = await db.post.findAll({
        where: {
-           is_deleted: null
+           deletedAt: null
        },
         order: [
             ['order_count', 'DESC']
