@@ -63,6 +63,21 @@ const retrieveRecommendationPosts = async () => {
   return posts;
 };
 
+const retrievePreviews = async (postId) => {
+    return await db.spot.findAll({
+        attributes: ['description', 'photo_urls.photo_url'],
+        where: {
+            id: postId
+        },
+        include: {
+            model: db.spot_photo,
+            as: 'photo_urls',
+            attributes: []
+        },
+        raw: true
+    })
+}
+
 const retrievePreviewTags = async (postId) => {
     return await db.post.findOne({
         attributes: ['title', 'author_id', 'description', 'tag_theme', 'tag_count_spot', 'tag_count_day',
@@ -82,5 +97,6 @@ module.exports = {
     retrievePopularPosts,
     retrieveLatestPosts,
     retrieveRecommendationPosts,
+    retrievePreviews,
     retrievePreviewTags,
 };

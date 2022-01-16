@@ -33,6 +33,17 @@ const retrieveRecommendationPosts = async (req, res) => {
   }
 };
 
+const retrievePreviews = async (req, res) => {
+    const { postId } = req.params;
+    try {
+        return res.status(statusCode.OK)
+            .json(util.success(await postService.retrievePreviews(postId)));
+    } catch (e) {
+        console.log(e);
+        return res.status(statusCode.BAD_REQUEST).json(util.fail(statusCode.BAD_REQUEST, responseMessage.VALIDATION_EXCEPTION));
+    }
+}
+
 const retrievePreviewTags = async (req, res) => {
     const { postId } = req.params;
     try {
@@ -48,5 +59,6 @@ module.exports = {
     retrievePopularPosts,
     retrieveLatestPosts,
     retrieveRecommendationPosts,
+    retrievePreviews,
     retrievePreviewTags,
 };
