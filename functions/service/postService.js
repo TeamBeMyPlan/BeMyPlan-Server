@@ -63,8 +63,24 @@ const retrieveRecommendationPosts = async () => {
   return posts;
 };
 
+const retrievePreviewTags = async (postId) => {
+    return await db.post.findOne({
+        attributes: ['title', 'author_id', 'description', 'tag_theme', 'tag_count_spot', 'tag_count_day',
+        'tag_count_restaurant', 'tag_partner', 'tag_money', 'tag_mobility', 'tag_month'],
+        where: {
+            id: postId,
+        },
+        include: {
+            model: db.user,
+            attributes: ['nickname'],
+        },
+        raw: true,
+    });
+}
+
 module.exports = {
-  retrievePopularPosts,
-  retrieveLatestPosts,
-  retrieveRecommendationPosts,
+    retrievePopularPosts,
+    retrieveLatestPosts,
+    retrieveRecommendationPosts,
+    retrievePreviewTags,
 };
