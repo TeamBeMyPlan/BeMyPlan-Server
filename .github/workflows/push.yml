@@ -1,12 +1,13 @@
 name: Firebase function deploy
 
 on:
-  push:
+  pull_request:
     branches: [ main ]
 
 jobs:
   deploy-firebase:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
 
@@ -29,3 +30,8 @@ jobs:
           args: deploy --only functions
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          NODE_ENV: ${{ secrets.NODE_ENV }}
