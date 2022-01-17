@@ -22,7 +22,13 @@ const getScrapPosts = async (userId, sort) => {
     });
 }
 
+const postScrapPosts = async (userId, postId) => {
+    return await db.scrap.create({
+        user_id: userId,
+        post_id: postId
+    });
+}
 module.exports = {
     getScrapPosts,
-    
+    postScrapPosts,
 };
