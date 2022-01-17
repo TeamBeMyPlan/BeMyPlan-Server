@@ -14,7 +14,8 @@ const retrievePopularPosts = async (req, res) => {
 
 const retrieveLatestPosts = async (req, res) => {
     try {
-        return res.status(statusCode.OK).json(util.success(await postService.retrieveLatestPosts()));
+        const { page, pageSize } = req.query;
+        return res.status(statusCode.OK).json(util.success(await postService.retrieveLatestPosts(page, pageSize)));
     } catch (e) {
         console.log(e);
         return res.status(statusCode.BAD_REQUEST).json(util.fail(statusCode.BAD_REQUEST, responseMessage.VALIDATION_EXCEPTION));
@@ -23,7 +24,8 @@ const retrieveLatestPosts = async (req, res) => {
 
 const retrieveRecommendationPosts = async (req, res) => {
   try {
-    return res.status(statusCode.OK).json(util.success(await postService.retrieveRecommendationPosts()));
+    const { page, pageSize } = req.query;
+    return res.status(statusCode.OK).json(util.success(await postService.retrieveRecommendationPosts(page, pageSize)));
   } catch (e) {
     console.log(e);
     return res.status(statusCode.BAD_REQUEST).json(util.fail(statusCode.BAD_REQUEST, responseMessage.VALIDATION_EXCEPTION));

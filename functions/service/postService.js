@@ -1,6 +1,6 @@
 const db = require('../models');
 const { Op } = require('sequelize');
-const pagination  = require('../lib/pagination');
+const pagination = require('../lib/pagination');
 
 const retrievePopularPosts = async () => {
     let posts = await db.post.findAll({
@@ -24,45 +24,57 @@ const retrievePopularPosts = async () => {
     return posts;
 }
 
-const retrieveLatestPosts = async () => {
-  let posts = await db.post.findAll({
+const retrieveLatestPosts = async (page, pageSize) => {
+  const result = db.post.findAndCountAll({
+    attributes: ['post.id', 'post.thumbnail_url', 'post.title', 'user.nickname'],
     where: {
       deletedAt: null,
     },
-    order: [
-        ['created_at', 'DESC']
-    ],
-    limit: 5,
-  });
-
-  posts = posts.map((post) => {
-    return {
-      id: post.id,
-      thumbnail_url: post.thumbnail_url,
-      title: post.title,
-    };
-  });
-  return posts;
-};
-
-
-const retrieveRecommendationPosts = async () => {
-  let posts = await db.post.findAll({
-    where: {
-      [Op.and]: [{ deletedAt: null }, { recommended: true }],
+    include: {
+      model: db.user,
+      attributes: []
     },
     order: [['created_at', 'DESC']],
-    limit: 5,
+    offset: page * pageSize,
+    limit: pageSize,
+    raw: true
   });
 
-  posts = posts.map((post) => {
-    return {
-      id: post.id,
-      thumbnail_url: post.thumbnail_url,
-      title: post.title,
-    };
+  const totalCount = (await result).count;
+  const totalPage = pagination.getTotalPage(totalCount, pageSize)
+  let posts = (await result).rows;
+
+  return {
+    items: posts,
+    totalPage: parseInt(totalPage)
+  };
+};
+
+const retrieveRecommendationPosts = async (page, pageSize) => {
+  const result = db.post.findAndCountAll({
+    attributes: ['post.id', 'post.thumbnail_url', 'post.title', 'user.nickname'],
+    where: {
+      deletedAt: null,
+      recommended: true
+    },
+    include: {
+      model: db.user,
+      attributes: []
+    },
+    order: [['created_at', 'DESC']],
+    offset: page * pageSize,
+    limit: pageSize,
+    raw: true
   });
-  return posts;
+
+  const totalCount = (await result).count;
+  const totalPage = pagination.getTotalPage(totalCount, pageSize)
+  let posts = (await result).rows;
+
+  return {
+    items: posts,
+    totalPage: parseInt(totalPage)
+  };
 };
 
 const getPostDetail = async (postId) => {
