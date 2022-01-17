@@ -22,7 +22,7 @@ const retrievePopularPosts = async () => {
 
 const retrieveLatestPosts = async (page, pageSize) => {
   const result = db.post.findAndCountAll({
-    attributes: ['post.id', 'post.thumbnail_url', 'post.title', 'user.nickname'],
+    attributes: ['id', 'thumbnail_url', 'title', 'user.nickname'],
     where: {
       deletedAt: null,
     },

@@ -3,22 +3,13 @@ const { Op } = require('sequelize');
 const pagination = require('../lib/pagination');
 
 const getAllAreas = async () => {
-  let areas = await db.area.findAll({
+  return await db.area.findAll({
+    attributes: ['id', 'name', 'photo_url', 'is_activated'],
     where: {
       deletedAt: null,
     },
     order: [['created_at', 'DESC']],
   });
-
-  areas = areas.map((area) => {
-    return {
-      id: area.id,
-      name: area.name,
-      photo_url: area.photo_url,
-      is_activated: area.is_activated,
-    };
-  });
-  return areas;
 };
 
 const getAllPostsByArea = async(areaId, page, pageSize, sort) => {
