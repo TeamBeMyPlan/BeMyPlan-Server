@@ -1,31 +1,31 @@
-name: Firebase function deploy
+# name: Firebase function deploy
 
-on:
-  push:
-    branches: [ main ]
+# on:
+#   push:
+#     branches: [ main ]
 
-jobs:
-  deploy-firebase:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
+# jobs:
+#   deploy-firebase:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
 
-      - name: create-json
-        id: create-json
-        uses: jsdaniell/create-json@1.1.2
-        with:
-          name: "config.json"
-          json: ${{ secrets.CONFIG_JSON }}
-          dir: 'functions/'
+#       - name: create-json
+#         id: create-json
+#         uses: jsdaniell/create-json@1.1.2
+#         with:
+#           name: "config.json"
+#           json: ${{ secrets.CONFIG_JSON }}
+#           dir: 'functions/'
 
-      - name: Install npm packages
-        run: |
-          cd functions
-          npm install
+#       - name: Install npm packages
+#         run: |
+#           cd functions
+#           npm install
 
-      - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master
-        with:
-          args: deploy --only functions
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+#       - name: Deploy to Firebase
+#         uses: w9jds/firebase-action@master
+#         with:
+#           args: deploy --only functions
+#         env:
+#           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

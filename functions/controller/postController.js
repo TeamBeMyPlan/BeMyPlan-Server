@@ -60,6 +60,18 @@ const retrievePreviewTags = async (req, res) => {
     }
 }
 
+const retrieveAuthorPosts = async (req, res) => {
+    try {
+    const { userId, page, pageSize, sort } = req.query;
+
+      return res.status(statusCode.OK)
+          .json(util.success(await postService.retrieveAuthorPosts(userId,page, pageSize, sort)));
+    } catch (e) {
+      console.log(e);
+      return res.status(statusCode.BAD_REQUEST).json(util.fail(statusCode.BAD_REQUEST, responseMessage.VALIDATION_EXCEPTION));
+    }
+};
+
 module.exports = {
     retrievePopularPosts,
     retrieveLatestPosts,
@@ -67,4 +79,5 @@ module.exports = {
     getPostDetail,
     retrievePreviews,
     retrievePreviewTags,
+    retrieveAuthorPosts,
 };
