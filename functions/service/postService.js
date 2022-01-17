@@ -2,24 +2,20 @@ const db = require('../models');
 const { Op } = require('sequelize');
 const pagination  = require('../lib/pagination');
 
+const FETCH_SIZE_POPULAR_POST = 10;
+
 const retrievePopularPosts = async () => {
-    let posts = await db.post.findAll({
+    const posts = await db.post.findAll({
+       attributes: ['id', 'thumbnail_url', 'title'],
        where: {
            deletedAt: null
        },
         order: [
             ['order_count', 'DESC']
             ],
-        limit: 10
+        limit: FETCH_SIZE_POPULAR_POST
     });
 
-    posts = posts.map((post) => {
-        return {
-            id: post.id,
-            thumbnail_url: post.thumbnail_url,
-            title: post.title
-        };
-    });
     posts.sort(() => Math.random() - 0.5);
     return posts;
 }
