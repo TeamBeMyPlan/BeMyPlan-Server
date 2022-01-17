@@ -82,6 +82,35 @@ order.belongsTo(post, {
 });
 
 /*
+user-scrap 일대다 관계 (유저는 여러개의 스크랩을 가질 수 잇다.)
+ */
+user.hasMany(scrap, {
+    sourceKey: 'id',
+    foreignKey: 'user_id',
+})
+
+scrap.belongsTo(user, {
+    onDelete: 'CASCADE',
+    targetKey: 'id',
+    foreignKey: 'user_id'
+});
+
+/*
+post-scrap 일대다 관계 (여러개의 스크랩 포스트가 있을 수 있다.)
+ */
+post.hasMany(scrap, {
+    sourceKey: 'id',
+    foreignKey: 'post_id',
+})
+
+scrap.belongsTo(post, {
+    onDelete: 'CASCADE',
+    targetKey: 'id',
+    foreignKey: 'post_id'
+});
+
+
+/*
 Spot-Spot_photo 일대다 관계 (관광지 별로 여러 개의 사진을 포함할 수 있다.)
  */
 spot.hasMany(spot_photo, {
