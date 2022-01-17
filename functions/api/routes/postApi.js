@@ -14,4 +14,6 @@ router.get('/suggest/list', postController.retrieveRecommendationListPosts);
 router.get('/:postId/preview', postController.retrievePreviews);
 router.get('/:postId/preview/tag', postController.retrievePreviewTags);
 
+router.get('/', postController.retrieveAuthorPosts);
+
 module.exports = router;
