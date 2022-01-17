@@ -5,8 +5,7 @@ const { postService } = require('../service');
 
 const retrievePopularPosts = async (req, res) => {
     try {
-        return res.status(statusCode.OK)
-            .json(util.success(await postService.retrievePopularPosts()));
+        return res.status(statusCode.OK).json(util.success(await postService.retrievePopularPosts()));
     } catch (e) {
         console.log(e);
         return res.status(statusCode.BAD_REQUEST).json(util.fail(statusCode.BAD_REQUEST, responseMessage.VALIDATION_EXCEPTION));
@@ -15,8 +14,7 @@ const retrievePopularPosts = async (req, res) => {
 
 const retrieveLatestPosts = async (req, res) => {
     try {
-        return res.status(statusCode.OK)
-            .json(util.success(await postService.retrieveLatestPosts()));
+        return res.status(statusCode.OK).json(util.success(await postService.retrieveLatestPosts()));
     } catch (e) {
         console.log(e);
         return res.status(statusCode.BAD_REQUEST).json(util.fail(statusCode.BAD_REQUEST, responseMessage.VALIDATION_EXCEPTION));
@@ -25,19 +23,27 @@ const retrieveLatestPosts = async (req, res) => {
 
 const retrieveRecommendationPosts = async (req, res) => {
   try {
-    return res.status(statusCode.OK)
-        .json(util.success(await postService.retrieveRecommendationPosts()));
+    return res.status(statusCode.OK).json(util.success(await postService.retrieveRecommendationPosts()));
   } catch (e) {
     console.log(e);
     return res.status(statusCode.BAD_REQUEST).json(util.fail(statusCode.BAD_REQUEST, responseMessage.VALIDATION_EXCEPTION));
   }
 };
 
+const getPostDetail = async (req, res) => {
+    const { postId } = req.params;
+    try {
+        return res.status(statusCode.OK).json(util.success(await postService.getPostDetail(postId)));
+    } catch (e) {
+        console.log(e);
+        return res.status(statusCode.BAD_REQUEST).json(util.fail(statusCode.BAD_REQUEST, responseMessage.VALIDATION_EXCEPTION));
+    }
+}
+
 const retrievePreviews = async (req, res) => {
     const { postId } = req.params;
     try {
-        return res.status(statusCode.OK)
-            .json(util.success(await postService.retrievePreviews(postId)));
+        return res.status(statusCode.OK).json(util.success(await postService.retrievePreviews(postId)));
     } catch (e) {
         console.log(e);
         return res.status(statusCode.BAD_REQUEST).json(util.fail(statusCode.BAD_REQUEST, responseMessage.VALIDATION_EXCEPTION));
@@ -47,18 +53,31 @@ const retrievePreviews = async (req, res) => {
 const retrievePreviewTags = async (req, res) => {
     const { postId } = req.params;
     try {
-        return res.status(statusCode.OK)
-            .json(util.success(await postService.retrievePreviewTags(postId)));
+        return res.status(statusCode.OK).json(util.success(await postService.retrievePreviewTags(postId)));
     } catch (e) {
         console.log(e);
         return res.status(statusCode.BAD_REQUEST).json(util.fail(statusCode.BAD_REQUEST, responseMessage.VALIDATION_EXCEPTION));
     }
 }
 
+const retrieveAuthorPosts = async (req, res) => {
+    try {
+    const { userId, page, pageSize, sort } = req.query;
+
+      return res.status(statusCode.OK)
+          .json(util.success(await postService.retrieveAuthorPosts(userId,page, pageSize, sort)));
+    } catch (e) {
+      console.log(e);
+      return res.status(statusCode.BAD_REQUEST).json(util.fail(statusCode.BAD_REQUEST, responseMessage.VALIDATION_EXCEPTION));
+    }
+};
+
 module.exports = {
     retrievePopularPosts,
     retrieveLatestPosts,
     retrieveRecommendationPosts,
+    getPostDetail,
     retrievePreviews,
     retrievePreviewTags,
+    retrieveAuthorPosts,
 };
