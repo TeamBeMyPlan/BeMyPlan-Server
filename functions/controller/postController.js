@@ -23,17 +23,6 @@ const retrieveLatestPosts = async (req, res) => {
     }
 }
 
-const retrieveLatestListPosts = async (req, res) => {
-  try {
-    const { page, pageSize } = req.query;
-
-    return res.status(statusCode.OK).json(util.success(await postService.retrieveLatestListPosts(page, pageSize)));
-  } catch (e) {
-    console.log(e);
-    return res.status(statusCode.BAD_REQUEST).json(util.fail(statusCode.BAD_REQUEST, responseMessage.VALIDATION_EXCEPTION));
-  }
-}
-
 const retrieveRecommendationPosts = async (req, res) => {
   try {
     return res.status(statusCode.OK)
@@ -43,19 +32,6 @@ const retrieveRecommendationPosts = async (req, res) => {
     return res.status(statusCode.BAD_REQUEST).json(util.fail(statusCode.BAD_REQUEST, responseMessage.VALIDATION_EXCEPTION));
   }
 };
-
-const retrieveRecommendationListPosts = async (req, res) => {
-    try {
-    const { page, pageSize } = req.query;
-
-      return res.status(statusCode.OK)
-          .json(util.success(await postService.retrieveRecommendationListPosts(page, pageSize)));
-    } catch (e) {
-      console.log(e);
-      return res.status(statusCode.BAD_REQUEST).json(util.fail(statusCode.BAD_REQUEST, responseMessage.VALIDATION_EXCEPTION));
-    }
-  };
-
 const retrievePreviews = async (req, res) => {
     const { postId } = req.params;
     try {
@@ -80,7 +56,6 @@ const retrievePreviewTags = async (req, res) => {
 
 const retrieveAuthorPosts = async (req, res) => {
     try {
-    // const { authorId } = req.params;
     const { userId, page, pageSize, sort } = req.query;
 
       return res.status(statusCode.OK)
@@ -101,6 +76,4 @@ module.exports = {
     retrievePreviewTags,
     
     retrieveAuthorPosts,
-    retrieveRecommendationListPosts,
-    retrieveLatestListPosts
 };
