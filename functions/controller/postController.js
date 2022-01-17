@@ -23,6 +23,15 @@ const retrieveLatestPosts = async (req, res) => {
     }
 }
 
+    const { page, pageSize } = req.query;
+
+    return res.status(statusCode.OK).json(util.success(await postService.retrieveLatestListPosts(page, pageSize)));
+  } catch (e) {
+    console.log(e);
+    return res.status(statusCode.BAD_REQUEST).json(util.fail(statusCode.BAD_REQUEST, responseMessage.VALIDATION_EXCEPTION));
+  }
+}
+
 const retrieveRecommendationPosts = async (req, res) => {
   try {
     return res.status(statusCode.OK)
@@ -61,4 +70,6 @@ module.exports = {
     retrieveRecommendationPosts,
     retrievePreviews,
     retrievePreviewTags,
+
+    retrieveLatestListPosts
 };
