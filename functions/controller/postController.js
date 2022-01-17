@@ -23,6 +23,8 @@ const retrieveLatestPosts = async (req, res) => {
     }
 }
 
+const retrieveLatestListPosts = async (req, res) => {
+  try {
     const { page, pageSize } = req.query;
 
     return res.status(statusCode.OK).json(util.success(await postService.retrieveLatestListPosts(page, pageSize)));
