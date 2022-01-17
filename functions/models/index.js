@@ -54,6 +54,34 @@ spot.belongsTo(post, {
 });
 
 /*
+user-order 일대다 관계 (유저는 여러개의 오더를 가질 수 잇다.)
+ */
+user.hasMany(order, {
+    sourceKey: 'id',
+    foreignKey: 'user_id',
+})
+
+order.belongsTo(user, {
+    onDelete: 'CASCADE',
+    targetKey: 'id',
+    foreignKey: 'user_id'
+});
+
+/*
+post-order 일대다 관계 (여러개의 오더와 포스트가 있을 수 있다.)
+ */
+post.hasMany(order, {
+    sourceKey: 'id',
+    foreignKey: 'post_id',
+})
+
+order.belongsTo(post, {
+    onDelete: 'CASCADE',
+    targetKey: 'id',
+    foreignKey: 'post_id'
+});
+
+/*
 Spot-Spot_photo 일대다 관계 (관광지 별로 여러 개의 사진을 포함할 수 있다.)
  */
 spot.hasMany(spot_photo, {
@@ -95,6 +123,7 @@ post.belongsToMany(user, {
     foreignKey: 'post_id',
     hooks: true
 });
+
 
 const db = {
     Sequelize,
