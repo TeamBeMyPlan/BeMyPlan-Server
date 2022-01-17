@@ -5,9 +5,11 @@ const { scrapService } = require('../service');
 
 const getScrapPosts = async (req, res) => {
   const { userId } = req.params;
+  
+  const { sort } = req.query;
   try {
       return res.status(statusCode.OK)
-          .json(util.success(await scrapService.getScrapPosts(userId)));
+          .json(util.success(await scrapService.getScrapPosts(userId, sort)));
   } catch (e) {
       console.log(e);
       return res.status(statusCode.BAD_REQUEST).json(util.fail(statusCode.BAD_REQUEST, responseMessage.VALIDATION_EXCEPTION));
@@ -15,5 +17,5 @@ const getScrapPosts = async (req, res) => {
 }
 
 module.exports = {
-    getScrapPosts
+    getScrapPosts,
 };

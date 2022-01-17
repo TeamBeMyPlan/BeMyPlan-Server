@@ -1,7 +1,7 @@
 
 const db = require('../models');
 
-const getScrapPosts = async (userId) => {
+const getScrapPosts = async (userId, sort) => {
     return await db.scrap.findAll({
         attributes: ['post.id', 'post.thumbnail_url', 'post.title', 'user.nickname'],
         where: {
@@ -17,11 +17,12 @@ const getScrapPosts = async (userId) => {
                 attributes: []
             },
         ],
-        order: [['created_at', 'DESC']],
+        order: [[sort, 'DESC']],
         raw: true,
     });
 }
 
 module.exports = {
     getScrapPosts,
+    
 };
