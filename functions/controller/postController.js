@@ -32,7 +32,6 @@ const retrieveRecommendationPosts = async (req, res) => {
     return res.status(statusCode.BAD_REQUEST).json(util.fail(statusCode.BAD_REQUEST, responseMessage.VALIDATION_EXCEPTION));
   }
 };
-
 const retrievePreviews = async (req, res) => {
     const { postId } = req.params;
     try {
@@ -55,10 +54,26 @@ const retrievePreviewTags = async (req, res) => {
     }
 }
 
+const retrieveAuthorPosts = async (req, res) => {
+    try {
+    const { userId, page, pageSize, sort } = req.query;
+
+      return res.status(statusCode.OK)
+          .json(util.success(await postService.retrieveAuthorPosts(userId,page, pageSize, sort)));
+    } catch (e) {
+      console.log(e);
+      return res.status(statusCode.BAD_REQUEST).json(util.fail(statusCode.BAD_REQUEST, responseMessage.VALIDATION_EXCEPTION));
+    }
+};
+
+
+
 module.exports = {
     retrievePopularPosts,
     retrieveLatestPosts,
     retrieveRecommendationPosts,
     retrievePreviews,
     retrievePreviewTags,
+    
+    retrieveAuthorPosts,
 };

@@ -1,5 +1,6 @@
 const db = require('../models');
 const { Op } = require('sequelize');
+const pagination  = require('../lib/pagination');
 
 const retrievePopularPosts = async () => {
     let posts = await db.post.findAll({
@@ -44,6 +45,7 @@ const retrieveLatestPosts = async () => {
   return posts;
 };
 
+
 const retrieveRecommendationPosts = async () => {
   let posts = await db.post.findAll({
     where: {
@@ -62,6 +64,8 @@ const retrieveRecommendationPosts = async () => {
   });
   return posts;
 };
+
+
 
 const retrievePreviews = async (postId) => {
     return await db.spot.findAll({
@@ -93,10 +97,42 @@ const retrievePreviewTags = async (postId) => {
     });
 }
 
+const retrieveAuthorPosts = async (authorId, page, pageSize, sort) => {
+  const result = db.post.findAndCountAll({
+    attributes: ['post.id', 'post.thumbnail_url', 'post.title', 'user.nickname'],
+    where: {
+      deletedAt: null,
+      author_id: authorId
+
+    },
+    include: {
+      model: db.user,
+      attributes: []
+    },
+    order: [[sort, 'DESC']],
+    offset: page * pageSize,
+    limit: pageSize,
+    raw: true
+  });
+
+  const totalCount = (await result).count;
+  const totalPage = pagination.getTotalPage(totalCount, pageSize)
+  let posts = (await result).rows;
+
+  return {
+    items: posts,
+    totalPage: parseInt(totalPage)
+  };
+  
+};
+
 module.exports = {
     retrievePopularPosts,
     retrieveLatestPosts,
     retrieveRecommendationPosts,
     retrievePreviews,
     retrievePreviewTags,
+
+    retrieveAuthorPosts,
 };
+
