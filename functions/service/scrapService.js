@@ -1,9 +1,9 @@
-
 const db = require('../models');
+const pagination = require('../lib/pagination');
 
-const getScrapPosts = async (userId, sort) => {
-    return await db.scrap.findAll({
-        attributes: ['post.id', 'post.thumbnail_url', 'post.title', 'user.nickname'],
+const getScarpByUserId = async (userId, page, pageSize, sort, order) => {
+    const posts = await db.scrap.findAndCountAll({
+        attributes: ['post.id', 'post.thumbnail_url', 'post.title', 'post.price', 'user.nickname'],
         where: {
             user_id: userId,
         },
@@ -17,9 +17,18 @@ const getScrapPosts = async (userId, sort) => {
                 attributes: []
             },
         ],
-        order: [[sort, 'DESC']],
+        order: [[sort, order]],
+        offset: page * pageSize,
+        limit: pageSize,
         raw: true,
     });
+    const totalCount = (await posts).count;
+    const totalPage = pagination.getTotalPage(totalCount, pageSize)
+
+    return {
+        items: (await posts).rows,
+        totalPage: parseInt(totalPage)
+    };
 }
 
 const postScrapPosts = async (userId, postId) => {
@@ -29,6 +38,6 @@ const postScrapPosts = async (userId, postId) => {
     });
 }
 module.exports = {
-    getScrapPosts,
+    getScarpByUserId,
     postScrapPosts,
 };
