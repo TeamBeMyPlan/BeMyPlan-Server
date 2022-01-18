@@ -12,36 +12,28 @@ const getAllAreas = async () => {
   });
 };
 
-const getAllPostsByArea = async(areaId, page, pageSize, sort) => {
-  const result = db.post.findAndCountAll({
+const getAllPostsByArea = async(areaId, page, pageSize, sort, order) => {
+  const posts = db.post.findAndCountAll({
+    attributes: ['id', 'title', 'thumbnail_url', [db.Sequelize.col('user.nickname'), 'author']],
     where: {
       deletedAt: null,
       area_id: areaId
     },
     include: {
       model: db.user,
-      attributes: ['nickname']
+      attributes: []
     },
-    order: [[sort, 'DESC']],
+    raw: true,
+    order: [[sort, order]],
     offset: page * pageSize,
     limit: pageSize
   });
 
-  const totalCount = (await result).count;
+  const totalCount = (await posts).count;
   const totalPage = pagination.getTotalPage(totalCount, pageSize);
-  let posts = (await result).rows;
-
-  posts = posts.map((post) => {
-    return {
-      id: post.id,
-      title: post.title,
-      thumbnail_url: post.thumbnail_url,
-      nickname: post.nickname,
-    };
-  });
 
   return {
-    items: posts,
+    items: (await posts).rows,
     totalPage: parseInt(totalPage)
   };
 }
