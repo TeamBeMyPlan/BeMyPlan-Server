@@ -94,7 +94,7 @@ const retrieveRecommendationPosts = async (page, pageSize) => {
 
 const getPostDetail = async (postId) => {
     const postInfo = await db.post.findOne({
-        attributes: [[db.Sequelize.col('user.nickname'), 'author'], 'title', ['tag_count_day', 'totalDays']],
+        attributes: ['author_id', [db.Sequelize.col('user.nickname'), 'author'], 'title', ['tag_count_day', 'totalDays']],
         where: {
             id: postId,
         },
@@ -133,6 +133,7 @@ const getPostDetail = async (postId) => {
     }
 
     return {
+        author_id: postInfo.author_id,
         author: postInfo.author,
         title: postInfo.title,
         spots,
