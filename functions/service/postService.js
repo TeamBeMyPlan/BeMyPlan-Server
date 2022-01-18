@@ -157,14 +157,17 @@ const retrievePreviews = async (postId) => {
 
 const retrievePreviewTags = async (postId) => {
     return await db.post.findOne({
-        attributes: ['title', 'author_id', 'description', 'tag_theme', 'tag_count_spot', 'tag_count_day',
-        'tag_count_restaurant', 'tag_partner', 'tag_money', 'tag_mobility', 'tag_month'],
+        attributes: {
+            exclude: ['id', 'thumbnail_url', 'order_count', 'recommended', 'recommended_date',
+                'createdAt', 'updatedAt', 'deletedAt', 'author_id', 'area_id'],
+            include: [[db.Sequelize.col('user.nickname'), 'author'], 'author_id']
+        },
         where: {
             id: postId,
         },
         include: {
             model: db.user,
-            attributes: ['nickname'],
+            attributes: [],
         },
         raw: true,
     });
