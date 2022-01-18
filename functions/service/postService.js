@@ -20,6 +20,26 @@ const retrievePopularPosts = async () => {
     return posts;
 }
 
+const checkPostIsPurchased = async (userId, postId) => {
+    const order = db.order.findOne({
+        where: {
+            user_id: userId,
+            post_id: postId,
+        }
+    });
+    return (order != null) ? true : false;
+}
+
+const checkPostIsScrapped = async (userId, postId) => {
+    const scrap = db.scrap.findOne({
+        where: {
+            user_id: userId,
+            post_id: postId,
+        }
+    });
+    return (scrap != null) ? true : false;
+}
+
 const retrieveLatestPosts = async (page, pageSize) => {
   const result = db.post.findAndCountAll({
     attributes: ['id', 'thumbnail_url', 'title', 'price', 'user.nickname'],
@@ -187,6 +207,8 @@ module.exports = {
     retrievePreviews,
     retrievePreviewTags,
     getPostDetail,
+    checkPostIsPurchased,
+    checkPostIsScrapped,
 
     retrieveAuthorPosts,
 };
