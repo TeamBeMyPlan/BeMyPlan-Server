@@ -141,18 +141,28 @@ const getPostDetail = async (postId) => {
 }
 
 const retrievePreviews = async (postId) => {
-    return await db.spot.findAll({
-        attributes: ['description', 'photo_urls.photo_url'],
+    const spots = await db.spot.findAll({
+        attributes: ['description'],
         where: {
-            id: postId
+            post_id: postId,
+            is_preview: true,
         },
         include: {
             model: db.spot_photo,
             as: 'photo_urls',
-            attributes: []
+            attributes: ['photo_url']
         },
-        raw: true
-    })
+    });
+
+    const result = [];
+    for (const spot of spots) {
+        const photoUrls = spot.photo_urls.map((photoUrl) => photoUrl.photo_url);
+        result.push({
+            description: spot.description,
+            photo_urls: photoUrls,
+        })
+    }
+    return result;
 }
 
 const retrievePreviewTags = async (postId) => {
