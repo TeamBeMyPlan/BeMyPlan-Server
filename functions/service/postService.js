@@ -41,7 +41,7 @@ const checkPostIsScrapped = async (userId, postId) => {
 }
 
 const retrieveLatestPosts = async (page, pageSize) => {
-  const result = db.post.findAndCountAll({
+  const posts = db.post.findAndCountAll({
     attributes: ['id', 'thumbnail_url', 'title', 'price', 'user.nickname'],
     where: {
       deletedAt: null,
@@ -56,12 +56,11 @@ const retrieveLatestPosts = async (page, pageSize) => {
     raw: true
   });
 
-  const totalCount = (await result).count;
+  const totalCount = (await posts).count;
   const totalPage = pagination.getTotalPage(totalCount, pageSize)
-  let posts = (await result).rows;
 
   return {
-    items: posts,
+    items: (await posts).rows,
     totalPage: parseInt(totalPage)
   };
 };
