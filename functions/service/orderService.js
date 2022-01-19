@@ -27,7 +27,8 @@ const getPurchasedPostsByUserId = async (userId, page, pageSize) => {
 
     return {
         items: (await posts).rows,
-        totalPage: parseInt(totalPage)
+        totalCount: totalCount,
+        totalPage: parseInt(totalPage),
     };
 }
 
