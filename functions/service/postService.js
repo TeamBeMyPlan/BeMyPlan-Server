@@ -25,19 +25,10 @@ const checkPostIsPurchased = async (userId, postId) => {
         where: {
             user_id: userId,
             post_id: postId,
+            deleteAt: null,
         }
     });
     return (order != null) ? true : false;
-}
-
-const checkPostIsScrapped = async (userId, postId) => {
-    const scrap = db.scrap.findOne({
-        where: {
-            user_id: userId,
-            post_id: postId,
-        }
-    });
-    return (scrap != null) ? true : false;
 }
 
 const retrieveLatestPosts = async (page, pageSize) => {
@@ -221,7 +212,6 @@ module.exports = {
     retrievePreviewTags,
     getPostDetail,
     checkPostIsPurchased,
-    checkPostIsScrapped,
 
     retrieveAuthorPosts,
 };
