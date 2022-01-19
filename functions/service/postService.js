@@ -20,9 +20,29 @@ const retrievePopularPosts = async () => {
     return posts;
 }
 
+const checkPostIsPurchased = async (userId, postId) => {
+    const order = db.order.findOne({
+        where: {
+            user_id: userId,
+            post_id: postId,
+        }
+    });
+    return (order != null) ? true : false;
+}
+
+const checkPostIsScrapped = async (userId, postId) => {
+    const scrap = db.scrap.findOne({
+        where: {
+            user_id: userId,
+            post_id: postId,
+        }
+    });
+    return (scrap != null) ? true : false;
+}
+
 const retrieveLatestPosts = async (page, pageSize) => {
-  const result = db.post.findAndCountAll({
-    attributes: ['post.id', 'post.thumbnail_url', 'post.title', 'user.nickname'],
+  const posts = db.post.findAndCountAll({
+    attributes: ['id', 'thumbnail_url', 'title', 'price', 'user.nickname'],
     where: {
       deletedAt: null,
     },
@@ -36,19 +56,18 @@ const retrieveLatestPosts = async (page, pageSize) => {
     raw: true
   });
 
-  const totalCount = (await result).count;
+  const totalCount = (await posts).count;
   const totalPage = pagination.getTotalPage(totalCount, pageSize)
-  let posts = (await result).rows;
 
   return {
-    items: posts,
+    items: (await posts).rows,
     totalPage: parseInt(totalPage)
   };
 };
 
 const retrieveRecommendationPosts = async (page, pageSize) => {
   const result = db.post.findAndCountAll({
-    attributes: ['post.id', 'post.thumbnail_url', 'post.title', 'user.nickname'],
+    attributes: ['post.id', 'post.thumbnail_url', 'post.title', 'price', 'user.nickname'],
     where: {
       deletedAt: null,
       recommended: true
@@ -75,7 +94,7 @@ const retrieveRecommendationPosts = async (page, pageSize) => {
 
 const getPostDetail = async (postId) => {
     const postInfo = await db.post.findOne({
-        attributes: [[db.Sequelize.col('user.nickname'), 'author'], 'title', ['tag_count_day', 'totalDays']],
+        attributes: ['author_id', [db.Sequelize.col('user.nickname'), 'author'], 'title', ['tag_count_day', 'totalDays']],
         where: {
             id: postId,
         },
@@ -114,6 +133,7 @@ const getPostDetail = async (postId) => {
     }
 
     return {
+        author_id: postInfo.author_id,
         author: postInfo.author,
         title: postInfo.title,
         spots,
@@ -122,30 +142,43 @@ const getPostDetail = async (postId) => {
 }
 
 const retrievePreviews = async (postId) => {
-    return await db.spot.findAll({
-        attributes: ['description', 'photo_urls.photo_url'],
+    const spots = await db.spot.findAll({
+        attributes: ['description'],
         where: {
-            id: postId
+            post_id: postId,
+            is_preview: true,
         },
         include: {
             model: db.spot_photo,
             as: 'photo_urls',
-            attributes: []
+            attributes: ['photo_url']
         },
-        raw: true
-    })
+    });
+
+    const result = [];
+    for (const spot of spots) {
+        const photoUrls = spot.photo_urls.map((photoUrl) => photoUrl.photo_url);
+        result.push({
+            description: spot.description,
+            photo_urls: photoUrls,
+        })
+    }
+    return result;
 }
 
 const retrievePreviewTags = async (postId) => {
     return await db.post.findOne({
-        attributes: ['title', 'author_id', 'description', 'tag_theme', 'tag_count_spot', 'tag_count_day',
-        'tag_count_restaurant', 'tag_partner', 'tag_money', 'tag_mobility', 'tag_month'],
+        attributes: {
+            exclude: ['id', 'thumbnail_url', 'order_count', 'recommended', 'recommended_date',
+                'createdAt', 'updatedAt', 'deletedAt', 'author_id', 'area_id'],
+            include: [[db.Sequelize.col('user.nickname'), 'author'], 'author_id']
+        },
         where: {
             id: postId,
         },
         include: {
             model: db.user,
-            attributes: ['nickname'],
+            attributes: [],
         },
         raw: true,
     });
@@ -187,6 +220,8 @@ module.exports = {
     retrievePreviews,
     retrievePreviewTags,
     getPostDetail,
+    checkPostIsPurchased,
+    checkPostIsScrapped,
 
     retrieveAuthorPosts,
 };

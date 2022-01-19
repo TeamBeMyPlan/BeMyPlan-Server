@@ -695,7 +695,7 @@ true Pacific/Easter
 false Pacific/Efate
 false Pacific/Enderbury
 false Pacific/Fakaofo
-true Pacific/Fiji
+false Pacific/Fiji
 false Pacific/Funafuti
 false Pacific/Galapagos
 false Pacific/Gambier
@@ -812,7 +812,7 @@ false posixrules
 14014||-9223372036854775808|U|G
 14014||10|U|G</Grants>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>17908</IntrospectionStateNumber>
+      <IntrospectionStateNumber>18668</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|16803|16805|1
 sequence|table|16814|16816|1
@@ -934,7 +934,7 @@ default_transaction_read_only=off</Config>
       <Comment>standard public schema</Comment>
       <StateNumber>529</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>17909</IntrospectionStateNumber>
+      <IntrospectionStateNumber>18669</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="25" parent="2" name="plpgsql">
@@ -1089,7 +1089,7 @@ default_transaction_read_only=off</Config>
     <table id="46" parent="24" name="post">
       <ObjectId>16828</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>17646</StateNumber>
+      <StateNumber>18667</StateNumber>
     </table>
     <table id="47" parent="24" name="scrap">
       <ObjectId>16900</ObjectId>
@@ -1099,7 +1099,7 @@ default_transaction_read_only=off</Config>
     <table id="48" parent="24" name="spot">
       <ObjectId>16851</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>17647</StateNumber>
+      <StateNumber>18259</StateNumber>
     </table>
     <table id="49" parent="24" name="spot_photo">
       <ObjectId>16867</ObjectId>
@@ -1368,10 +1368,10 @@ post_id</ColNames>
     </column>
     <column id="85" parent="46" name="tag_money">
       <Position>14</Position>
-      <DataType>integer|0s</DataType>
+      <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>17646</StateNumber>
-      <TypeId>23</TypeId>
+      <StateNumber>18667</StateNumber>
+      <TypeId>1043</TypeId>
     </column>
     <column id="86" parent="46" name="tag_mobility">
       <Position>15</Position>
@@ -1421,7 +1421,7 @@ post_id</ColNames>
     </column>
     <index id="93" parent="46" name="post_pkey">
       <ObjectId>16837</ObjectId>
-      <StateNumber>17646</StateNumber>
+      <StateNumber>18667</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -1659,7 +1659,14 @@ post_id</ColNames>
       <StateNumber>17647</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="124" parent="48" name="spot_pkey">
+    <column id="124" parent="48" name="is_preview">
+      <Position>16</Position>
+      <DataType>boolean|0s</DataType>
+      <StateNumber>18259</StateNumber>
+      <DefaultExpression>false</DefaultExpression>
+      <TypeId>16</TypeId>
+    </column>
+    <index id="125" parent="48" name="spot_pkey">
       <ObjectId>16858</ObjectId>
       <StateNumber>17647</StateNumber>
       <ColNames>id</ColNames>
@@ -1669,14 +1676,14 @@ post_id</ColNames>
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <key id="125" parent="48" name="spot_pkey">
+    <key id="126" parent="48" name="spot_pkey">
       <ObjectId>16859</ObjectId>
       <StateNumber>17647</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>spot_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="126" parent="48" name="spot_post_id_fkey">
+    <foreign-key id="127" parent="48" name="spot_post_id_fkey">
       <ObjectId>16860</ObjectId>
       <StateNumber>17647</StateNumber>
       <ColNames>post_id</ColNames>
@@ -1688,7 +1695,7 @@ post_id</ColNames>
       <OnDelete>set-null</OnDelete>
       <OnUpdate>cascade</OnUpdate>
     </foreign-key>
-    <column id="127" parent="49" name="id">
+    <column id="128" parent="49" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1696,40 +1703,40 @@ post_id</ColNames>
       <DefaultExpression>nextval(&apos;spot_photo_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="128" parent="49" name="photo_url">
+    <column id="129" parent="49" name="photo_url">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>17648</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="129" parent="49" name="created_at">
+    <column id="130" parent="49" name="created_at">
       <Position>3</Position>
       <DataType>timestamp with time zone|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>17648</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="130" parent="49" name="updated_at">
+    <column id="131" parent="49" name="updated_at">
       <Position>4</Position>
       <DataType>timestamp with time zone|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>17648</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="131" parent="49" name="deleted_at">
+    <column id="132" parent="49" name="deleted_at">
       <Position>5</Position>
       <DataType>timestamp with time zone|0s</DataType>
       <StateNumber>17849</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="132" parent="49" name="spot_id">
+    <column id="133" parent="49" name="spot_id">
       <Position>6</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>17648</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="133" parent="49" name="spot_photo_pkey">
+    <index id="134" parent="49" name="spot_photo_pkey">
       <ObjectId>16871</ObjectId>
       <StateNumber>17648</StateNumber>
       <ColNames>id</ColNames>
@@ -1739,14 +1746,14 @@ post_id</ColNames>
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <key id="134" parent="49" name="spot_photo_pkey">
+    <key id="135" parent="49" name="spot_photo_pkey">
       <ObjectId>16872</ObjectId>
       <StateNumber>17648</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>spot_photo_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="135" parent="49" name="spot_photo_spot_id_fkey">
+    <foreign-key id="136" parent="49" name="spot_photo_spot_id_fkey">
       <ObjectId>16873</ObjectId>
       <StateNumber>17648</StateNumber>
       <ColNames>spot_id</ColNames>
@@ -1758,7 +1765,7 @@ post_id</ColNames>
       <OnDelete>set-null</OnDelete>
       <OnUpdate>cascade</OnUpdate>
     </foreign-key>
-    <column id="136" parent="50" name="id">
+    <column id="137" parent="50" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1766,48 +1773,48 @@ post_id</ColNames>
       <DefaultExpression>nextval(&apos;user_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="137" parent="50" name="nickname">
+    <column id="138" parent="50" name="nickname">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>17644</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="138" parent="50" name="social_type">
+    <column id="139" parent="50" name="social_type">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>17644</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="139" parent="50" name="social_token">
+    <column id="140" parent="50" name="social_token">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>17644</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="140" parent="50" name="created_at">
+    <column id="141" parent="50" name="created_at">
       <Position>5</Position>
       <DataType>timestamp with time zone|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>17644</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="141" parent="50" name="updated_at">
+    <column id="142" parent="50" name="updated_at">
       <Position>6</Position>
       <DataType>timestamp with time zone|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>17644</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="142" parent="50" name="deleted_at">
+    <column id="143" parent="50" name="deleted_at">
       <Position>7</Position>
       <DataType>timestamp with time zone|0s</DataType>
       <StateNumber>17858</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <index id="143" parent="50" name="user_pkey">
+    <index id="144" parent="50" name="user_pkey">
       <ObjectId>16812</ObjectId>
       <StateNumber>17644</StateNumber>
       <ColNames>id</ColNames>
@@ -1817,7 +1824,7 @@ post_id</ColNames>
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <key id="144" parent="50" name="user_pkey">
+    <key id="145" parent="50" name="user_pkey">
       <ObjectId>16813</ObjectId>
       <StateNumber>17644</StateNumber>
       <ColNames>id</ColNames>
