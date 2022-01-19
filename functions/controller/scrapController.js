@@ -19,18 +19,18 @@ const getScarpByUserId = async (req, res) => {
   }
 }
 
-const postScrapPosts = async (req, res) => {
-    const { userId, postId } = req.query;
+const scrapPostByPostId = async (req, res) => {
+    const { postId } = req.params;
+    const { userId } = req.query; // TODO: 토큰으로 변경
     try {
-        return res.status(statusCode.OK)
-            .json(util.success(await scrapService.postScrapPosts(userId, postId)));
+        return res.status(statusCode.OK).json(util.success(await scrapService.scrapPostByPostId(userId, postId)));
     } catch (e) {
         console.log(e);
         return res.status(statusCode.BAD_REQUEST).json(util.fail(statusCode.BAD_REQUEST, responseMessage.VALIDATION_EXCEPTION));
     }
-  }
+}
 
 module.exports = {
     getScarpByUserId,
-    postScrapPosts,
+    scrapPostByPostId,
 };
