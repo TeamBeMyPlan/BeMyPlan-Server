@@ -4,9 +4,12 @@ const postApi = require('./postApi');
 const areaApi = require('./areaApi');
 const orderApi = require('./orderApi');
 const scrapApi = require('./scrapApi');
+const userApi = require('./userApi');
 
 router.use('/post', postApi);
 router.use('/area', areaApi);
 router.use('/order', orderApi);
 router.use('/scrap', scrapApi);
+router.use('/user', userApi);
+
 module.exports = router;
