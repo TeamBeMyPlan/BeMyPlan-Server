@@ -1,8 +1,8 @@
-
 const db = require('../models');
+const pagination = require('../lib/pagination');
 
-const getOrderPosts = async (userId) => {
-    return await db.order.findAll({
+const getPurchasedPostsByUserId = async (userId, page, pageSize) => {
+    const posts = await db.order.findAndCountAll({
         attributes: ['post.id', 'post.thumbnail_url', 'post.title', 'user.nickname'],
         where: {
             user_id: userId,
@@ -10,7 +10,7 @@ const getOrderPosts = async (userId) => {
         include: [
             {
                 model: db.post,
-                attributes: []
+                attributes: [],
             },
             {
                 model: db.user,
@@ -19,9 +19,18 @@ const getOrderPosts = async (userId) => {
         ],
         order: [['created_at', 'DESC']],
         raw: true,
+        offset: page * pageSize,
+        limit: pageSize,
     });
+    const totalCount = (await posts).count;
+    const totalPage = pagination.getTotalPage(totalCount, pageSize)
+
+    return {
+        items: (await posts).rows,
+        totalPage: parseInt(totalPage)
+    };
 }
 
 module.exports = {
-    getOrderPosts,
+    getPurchasedPostsByUserId,
 };
