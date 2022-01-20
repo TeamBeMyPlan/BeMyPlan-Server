@@ -23,6 +23,7 @@ post.belongsTo(user, {
     foreignKey: 'author_id'
 });
 
+
 /*
 Area-Post 일대다 관계 (특정 지역은 여러 개의 여행 후기를 포함할 수 있다.)
  */

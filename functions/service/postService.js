@@ -11,7 +11,12 @@ const retrievePopularPosts = async (userId) => {
        where: {
            deletedAt: null
        },
-       include: 
+       include: [
+        {
+            model: db.user,
+            attributes:['nickname'],
+            // required: false,
+        },
         {
             model: db.order,
             where: {
@@ -20,21 +25,22 @@ const retrievePopularPosts = async (userId) => {
             attributes: ['id'],
             required: false
         },
+    ],
         order: [['order_count', 'DESC']],
-            
+        // raw:true,
         limit: FETCH_SIZE_POPULAR_POST
     });
 
     return posts.map(post => {
-        const is_purchased = (post.orders).length > 0 ? true : false;
+        const is_purchased = (post.orders.length) > 0 ? true : false;
         return {
             post_id: post.id,
             title: post.title,
+            author: post.user.nickname,
             thumbnail_url: post.thumbnail_url,
             is_purchased,
         }
     })
-
 }
 
 const checkPostIsPurchased = async (userId, postId) => {
@@ -48,57 +54,121 @@ const checkPostIsPurchased = async (userId, postId) => {
     return (order != null) ? true : false;
 }
 
-const retrieveLatestPosts = async (page, pageSize) => {
-  const posts = db.post.findAndCountAll({
-    attributes: ['id', 'thumbnail_url', 'title', 'price', [db.Sequelize.col('user.nickname'), 'author']],
-    where: {
-      deletedAt: null,
-    },
-    include: {
-      model: db.user,
-      attributes: []
-    },
-    order: [['created_at', 'DESC']],
-    offset: page * pageSize,
-    limit: pageSize,
-    raw: true
-  });
+const retrieveLatestPosts = async (userId, page, pageSize) => {
+    const result = await db.post.findAndCountAll({
+        attributes: ['id', 'thumbnail_url', 'title', 'created_at'],
+        where: {
+            deletedAt: null
+        },
+        include: [
+         {
+             model: db.user,
+             attributes:['nickname'],
+             // required: false,
+         },
+         {
+             model: db.order,
+             where: {
+                 user_id: userId,
+             },
+             attributes: ['id'],
+             required: false
+         },
+         {
+             model: db.scrap,
+             where: {
+                 user_id: userId,
+             },
+             attributes: ['id'],
+             required: false
+         },
+     ],
+         order: [['created_at', 'DESC']],
+         offset: page * pageSize,
+         limit: FETCH_SIZE_POPULAR_POST
+     });
+     const totalCount = (await result).count;
+     const totalPage = pagination.getTotalPage(totalCount, pageSize)
 
-  const totalCount = (await posts).count;
-  const totalPage = pagination.getTotalPage(totalCount, pageSize)
+     let posts = (await result).rows;
 
-  return {
-    items: (await posts).rows,
-    totalPage: parseInt(totalPage)
-  };
+     posts = posts.map(post => {
+         const is_purchased = (post.orders.length) > 0 ? true : false;
+         const is_scraped = (post.scraps.length) > 0 ? true : false;
+         return {
+             post_id: post.id,
+             title: post.title,
+             author: post.user.nickname,
+             thumbnail_url: post.thumbnail_url,
+             is_purchased,
+             is_scraped,
+         }
+     })
+     return {
+        items: posts,
+        totalPage: parseInt(totalPage)
+      };
+
+  
 };
 
-const retrieveRecommendationPosts = async (page, pageSize) => {
-  const result = db.post.findAndCountAll({
-    attributes: ['post.id', 'post.thumbnail_url', 'post.title', 'price', [db.Sequelize.col('user.nickname'), 'author']],
-    where: {
-      deletedAt: null,
-      recommended: true
-    },
-    include: {
-      model: db.user,
-      attributes: []
-    },
-    order: [['created_at', 'DESC']],
-    offset: page * pageSize,
-    limit: pageSize,
-    raw: true
-  });
+const retrieveRecommendationPosts = async (userId, page, pageSize) => {
+    const result = await db.post.findAndCountAll({
+        attributes: ['id', 'thumbnail_url', 'title', 'created_at'],
+        where: {
+            deletedAt: null,
+            recommended: true
+        },
+        include: [
+         {
+             model: db.user,
+             attributes:['nickname'],
+             // required: false,
+         },
+         {
+             model: db.order,
+             where: {
+                 user_id: userId,
+             },
+             attributes: ['id'],
+             required: false
+         },
+         {
+             model: db.scrap,
+             where: {
+                 user_id: userId,
+             },
+             attributes: ['id'],
+             required: false
+         },
+     ],
+         order: [['created_at', 'DESC']],
+         offset: page * pageSize,
+         limit: FETCH_SIZE_POPULAR_POST
+     });
+     const totalCount = (await result).count;
+     const totalPage = pagination.getTotalPage(totalCount, pageSize)
 
-  const totalCount = (await result).count;
-  const totalPage = pagination.getTotalPage(totalCount, pageSize)
-  let posts = (await result).rows;
+     let posts = (await result).rows;
 
-  return {
-    items: posts,
-    totalPage: parseInt(totalPage)
-  };
-};
+     posts = posts.map(post => {
+         const is_purchased = (post.orders.length) > 0 ? true : false;
+         const is_scraped = (post.scraps.length) > 0 ? true : false;
+         return {
+             post_id: post.id,
+             title: post.title,
+             author: post.user.nickname,
+             thumbnail_url: post.thumbnail_url,
+             is_purchased,
+             is_scraped,
+         }
+     })
+     return {
+        items: posts,
+        totalPage: parseInt(totalPage)
+      };
+}
+
 
 const getPostDetail = async (postId) => {
     const postInfo = await db.post.findOne({
