@@ -32,8 +32,8 @@ const getScarpByUserId = async (userId, page, pageSize, sort, order) => {
 }
 
 const scrapPostByPostId = async (userId, postId) => {
-    checkPostIsScrapped(userId, postId).then(async scrapped => {
-        console.log(scrapped);
+    checkPostIsScrapped(userId, postId)
+        .then(async scrapped => {
         if (scrapped) {
             await db.scrap.destroy({
                 where: {
@@ -51,8 +51,19 @@ const scrapPostByPostId = async (userId, postId) => {
                 },
                 paranoid: false
             });
+        }});
+    const scrapCount = await db.scrap.count({
+        where: {
+            user_id: userId,
+            post_id: postId,
+            deletedAt: null
         }
     });
+    const scrapped = scrapCount === 0 ? false : true;
+    console.log(scrapped);
+    return {
+        scrapped
+    };
 }
 
 const checkPostIsScrapped = async (userId, postId) => {
