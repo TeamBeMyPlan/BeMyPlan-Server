@@ -66,6 +66,15 @@ const retrievePreviewTags = async (req, res) => {
     }
 }
 
+const retrievePostsByRandom = async (req, res) => {
+    try {
+        return res.status(statusCode.OK).json(util.success(await postService.retrievePostsByRandom()));
+    } catch (e) {
+        console.log(e);
+        return res.status(statusCode.BAD_REQUEST).json(util.fail(statusCode.BAD_REQUEST, responseMessage.VALIDATION_EXCEPTION));
+    }
+}
+
 module.exports = {
     retrievePopularPosts,
     retrieveLatestPosts,
@@ -73,4 +82,5 @@ module.exports = {
     getPostDetail,
     retrievePreviews,
     retrievePreviewTags,
+    retrievePostsByRandom
 };
