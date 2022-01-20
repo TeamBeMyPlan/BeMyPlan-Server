@@ -1,6 +1,7 @@
 const db = require('../models');
 const { Op } = require('sequelize');
 const pagination = require('../lib/pagination');
+const { Sequelize } = require('../models');
 
 const FETCH_SIZE_POPULAR_POST = 10;
 
@@ -175,6 +176,18 @@ const retrievePreviewTags = async (postId) => {
     });
 }
 
+const retrievePostsByRandom = async () => {
+   return await db.post.findAll({
+       attributes: ['id', 'thumbnail_url', 'title'],
+       where: {
+           deletedAt: null
+       },
+       order: Sequelize.literal('random()'),
+       limit: 5
+    });
+
+}
+
 module.exports = {
     retrievePopularPosts,
     retrieveLatestPosts,
@@ -183,4 +196,5 @@ module.exports = {
     retrievePreviewTags,
     getPostDetail,
     checkPostIsPurchased,
+    retrievePostsByRandom
 };
