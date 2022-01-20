@@ -29,7 +29,7 @@ const checkPostIsPurchased = async (userId, postId) => {
             deleteAt: null,
         }
     });
-    return (order != null) ? true : false;
+    return order !== null;
 }
 
 const retrieveLatestPosts = async (page, pageSize) => {
