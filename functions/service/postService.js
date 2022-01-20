@@ -176,15 +176,35 @@ const retrievePreviewTags = async (postId) => {
     });
 }
 
-const retrievePostsByRandom = async () => {
-   return await db.post.findAll({
-       attributes: ['id', 'thumbnail_url', 'title'],
+const retrievePostsByRandom = async (userId) => {
+   let posts = await db.post.findAll({
+       attributes: ['id', 'title', 'thumbnail_url', 'price'],
        where: {
-           deletedAt: null
+           deletedAt: null,
        },
+       include: [
+        {
+            model: db.order,
+            where: {
+                user_id: userId,
+            },
+            attributes: ['id'],
+            required: false
+        },
+    ],
        order: Sequelize.literal('random()'),
-       limit: 5
+       limit: 10
     });
+    return posts.map(post => {
+        const is_purchased = (post.orders).length > 0 ? true : false;
+        return {
+            post_id: post.id,
+            title: post.title,
+            thumbnail_url: post.thumbnail_url,
+            price: post.price,
+            is_purchased,
+        }
+    })
 
 }
 
