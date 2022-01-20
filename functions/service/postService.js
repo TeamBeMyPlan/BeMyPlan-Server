@@ -34,7 +34,7 @@ const checkPostIsPurchased = async (userId, postId) => {
 
 const retrieveLatestPosts = async (page, pageSize) => {
   const posts = db.post.findAndCountAll({
-    attributes: ['id', 'thumbnail_url', 'title', 'price', 'user.nickname'],
+    attributes: ['id', 'thumbnail_url', 'title', 'price', [db.Sequelize.col('user.nickname'), 'author']],
     where: {
       deletedAt: null,
     },
@@ -59,7 +59,7 @@ const retrieveLatestPosts = async (page, pageSize) => {
 
 const retrieveRecommendationPosts = async (page, pageSize) => {
   const result = db.post.findAndCountAll({
-    attributes: ['post.id', 'post.thumbnail_url', 'post.title', 'price', 'user.nickname'],
+    attributes: ['post.id', 'post.thumbnail_url', 'post.title', 'price', [db.Sequelize.col('user.nickname'), 'author']],
     where: {
       deletedAt: null,
       recommended: true

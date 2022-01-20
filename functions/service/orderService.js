@@ -3,7 +3,7 @@ const pagination = require('../lib/pagination');
 
 const getPurchasedPostsByUserId = async (userId, page, pageSize) => {
     const posts = await db.order.findAndCountAll({
-        attributes: ['post.id', 'post.thumbnail_url', 'post.title', 'user.nickname'],
+        attributes: ['post.id', 'post.thumbnail_url', 'post.title', [db.Sequelize.col('user.nickname'), 'author']],
         where: {
             user_id: userId,
         },
