@@ -31,6 +31,7 @@ const login = async (socialType, socialToken, nickname) => {
         //TODO refresh Token 구현!
 
         return {
+            created: created,
             nickname: user.nickname,
             access_token: access_token
         };
