@@ -3,7 +3,7 @@ const pagination = require('../lib/pagination');
 
 const getScarpByUserId = async (userId, page, pageSize, sort, order) => {
     const posts = await db.scrap.findAndCountAll({
-        attributes: ['post.id', 'post.thumbnail_url', 'post.title', 'post.price', [db.Sequelize.col('user.nickname'), 'author']],
+        attributes: ['post.id', 'post.thumbnail_url', 'post.title', 'post.price'],
         where: {
             user_id: userId,
         },
@@ -11,11 +11,7 @@ const getScarpByUserId = async (userId, page, pageSize, sort, order) => {
             {
                 model: db.post,
                 attributes: []
-            },
-            {
-                model: db.user,
-                attributes: []
-            },
+            }
         ],
         order: [[sort, order]],
         offset: page * pageSize,
