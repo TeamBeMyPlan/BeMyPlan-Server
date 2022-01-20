@@ -812,7 +812,7 @@ false posixrules
 14014||-9223372036854775808|U|G
 14014||10|U|G</Grants>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>18668</IntrospectionStateNumber>
+      <IntrospectionStateNumber>19466</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|16803|16805|1
 sequence|table|16814|16816|1
@@ -934,7 +934,7 @@ default_transaction_read_only=off</Config>
       <Comment>standard public schema</Comment>
       <StateNumber>529</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>18669</IntrospectionStateNumber>
+      <IntrospectionStateNumber>19467</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="25" parent="2" name="plpgsql">
@@ -1299,10 +1299,10 @@ post_id</ColNames>
     </column>
     <column id="75" parent="46" name="description">
       <Position>4</Position>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>17646</StateNumber>
-      <TypeId>1043</TypeId>
+      <StateNumber>19460</StateNumber>
+      <TypeId>25</TypeId>
     </column>
     <column id="76" parent="46" name="price">
       <Position>5</Position>
@@ -1575,10 +1575,10 @@ post_id</ColNames>
     </column>
     <column id="111" parent="48" name="description">
       <Position>3</Position>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>17647</StateNumber>
-      <TypeId>1043</TypeId>
+      <StateNumber>19463</StateNumber>
+      <TypeId>25</TypeId>
     </column>
     <column id="112" parent="48" name="address">
       <Position>4</Position>
@@ -1787,11 +1787,11 @@ post_id</ColNames>
       <StateNumber>17644</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="140" parent="50" name="social_token">
+    <column id="140" parent="50" name="social_id">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>17644</StateNumber>
+      <StateNumber>19370</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="141" parent="50" name="created_at">

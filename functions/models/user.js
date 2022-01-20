@@ -17,7 +17,7 @@ const user = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    social_token: {
+    social_id: {
       type: DataTypes.STRING,
       allowNull: false,
     },
