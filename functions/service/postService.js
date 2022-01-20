@@ -5,20 +5,36 @@ const { Sequelize } = require('../models');
 
 const FETCH_SIZE_POPULAR_POST = 10;
 
-const retrievePopularPosts = async () => {
-    const posts = await db.post.findAll({
-       attributes: ['id', 'thumbnail_url', 'title'],
+const retrievePopularPosts = async (userId) => {
+    let posts = await db.post.findAll({
+       attributes: ['id', 'thumbnail_url', 'title', 'order_count'],
        where: {
            deletedAt: null
        },
-        order: [
-            ['order_count', 'DESC']
-            ],
+       include: 
+        {
+            model: db.order,
+            where: {
+                user_id: userId,
+            },
+            attributes: ['id'],
+            required: false
+        },
+        order: [['order_count', 'DESC']],
+            
         limit: FETCH_SIZE_POPULAR_POST
     });
 
-    posts.sort(() => Math.random() - 0.5);
-    return posts;
+    return posts.map(post => {
+        const is_purchased = (post.orders).length > 0 ? true : false;
+        return {
+            post_id: post.id,
+            title: post.title,
+            thumbnail_url: post.thumbnail_url,
+            is_purchased,
+        }
+    })
+
 }
 
 const checkPostIsPurchased = async (userId, postId) => {
