@@ -13,11 +13,11 @@ const getPostsByUserId = async (authorId, page, pageSize, sort, order) => {
         offset: page * pageSize,
         limit: pageSize,
     });
-    const totalCount = (await posts).count;
+    const totalCount = posts.count;
     const totalPage = pagination.getTotalPage(totalCount, pageSize);
 
     return {
-        items: (await posts).rows,
+        items: posts.rows,
         totalPage: parseInt(totalPage)
     };
 };
