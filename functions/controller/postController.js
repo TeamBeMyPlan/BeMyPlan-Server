@@ -68,7 +68,8 @@ const retrievePreviewTags = async (req, res) => {
 
 const retrievePostsByRandom = async (req, res) => {
     try {
-        return res.status(statusCode.OK).json(util.success(await postService.retrievePostsByRandom()));
+        const { userId } = req.params;
+        return res.status(statusCode.OK).json(util.success(await postService.retrievePostsByRandom(userId)));
     } catch (e) {
         console.log(e);
         return res.status(statusCode.BAD_REQUEST).json(util.fail(statusCode.BAD_REQUEST, responseMessage.VALIDATION_EXCEPTION));
