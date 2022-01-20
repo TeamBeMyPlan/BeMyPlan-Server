@@ -22,11 +22,11 @@ const getPurchasedPostsByUserId = async (userId, page, pageSize) => {
         offset: page * pageSize,
         limit: pageSize,
     });
-    const totalCount = (await posts).count;
+    const totalCount = posts.count;
     const totalPage = pagination.getTotalPage(totalCount, pageSize)
 
     return {
-        items: (await posts).rows,
+        items: posts.rows,
         totalCount: totalCount,
         totalPage: parseInt(totalPage),
     };
