@@ -7,8 +7,8 @@ const getAllAreas = async (req, res) => {
 };
 
 const getAllPostsByArea = async (req, res) => {
-    const {areaId} = req.params;
-    const {userId} = req.query;
+    const { areaId } = req.params;
+    const userId = 3;
     const page = req.query.page || 0;
     const pageSize = req.query.pageSize || 5;
     const sort = req.query.sort || 'createdAt';

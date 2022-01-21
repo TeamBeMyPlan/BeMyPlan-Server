@@ -3,7 +3,7 @@ const statusCode = require('../constants/statusCode');
 const {orderService} = require('../service');
 
 const getPurchasedPostsByUserId = async (req, res) => {
-    const {userId} = req.params;
+    const userId = 3;
     const page = req.query.page || 0;
     const pageSize = req.query.pageSize || 10;
 
