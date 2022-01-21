@@ -9,17 +9,6 @@
 ### API DOCS
 [be-my-plan-api-docs](https://wood-sandpaper-707.notion.site/API-bca655150dce4eb8bed070a4cad8c3df)
 
-<details>
-      <summary><i>API 구현 진척도</i></summary>
-      <div markdown="1">
-            인기/최신/추천 여행일정 조회 => 완료!</br>
-      현재 <b>여행지 선택 조회, 여행지 여행일정 조회</b> 진행중
-      </div>
-</details>
-
-### ERD
-![image](https://user-images.githubusercontent.com/81547780/148912777-6f990228-f369-47e5-905a-d0064bdaabd7.png)
-
 ### Development Environment   
 <img src="https://img.shields.io/badge/Node.js-v16-green"/> <img src="https://img.shields.io/badge/PostgreSQL-v12.5-blue"/> <img src="https://img.shields.io/badge/Express-v4.17.2-green"/> <img src="https://img.shields.io/badge/Javascript-es6-yellow"/> <img src="https://img.shields.io/badge/firebase-yellow"/>   
 
@@ -53,6 +42,50 @@ github flow 사용
 
 [airbnb-javascript-guide](https://github.com/airbnb/javascript)
 
+
+### ERD
+![image](./images/비마플ERD.png)
+
+### Dependency
+```
+functions
+├── @slack/web-api@6.6.0
+├── busboy@1.3.0
+├── cookie-parser@1.4.6
+├── cors@2.8.5
+├── cross-env@7.0.3
+├── dayjs@1.10.7
+├── dotenv@10.0.0
+├── eslint-config-google@0.14.0
+├── eslint-config-prettier@8.3.0
+├── eslint@7.32.0
+├── express@4.17.2
+├── firebase-admin@9.12.0
+├── firebase-functions-test@0.2.3 
+├── firebase-functions@3.16.0
+├── firebase@9.6.2
+├── helmet@5.0.1
+├── hpp@0.2.3
+├── jsonwebtoken@8.5.1
+├── lodash@4.17.21
+├── lru_map@0.3.3 extraneous
+├── pg-hstore@2.3.4
+├── pg@8.7.1
+├── request-promise@4.2.6
+├── request@2.88.2
+├── @sentry/core@6.16.1 extraneous
+├── @sentry/hub@6.16.1 extraneous
+├── @sentry/minimal@6.16.1 extraneous
+├── @sentry/node@6.16.1 extraneous
+├── @sentry/tracing@6.16.1 extraneous
+├── @sentry/types@6.16.1 extraneous
+├── @sentry/utils@6.16.1 extraneous
+└── sequelize@6.13.0
+```
+
+### Test
+![test](./images/runner-test.png)
+
 ### folding project / 프로젝트 폴더링
 
 ```
@@ -66,8 +99,14 @@ bemyplan_server
           |- routes
       |- config
       |- constants
+      |- contorller
+      |- loaders
+      |- models
+      |- service
       |- lib
       |- db
+      |- utils
+      |- images
 ```
 
 ### Developers
