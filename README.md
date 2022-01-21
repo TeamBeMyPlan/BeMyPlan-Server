@@ -111,6 +111,9 @@ bemyplan_server
 
 ### Developers
 
+![비마플 서버 (1)](https://user-images.githubusercontent.com/81547780/150524315-a72795be-e4f6-4c32-b190-ae57f2a5c892.jpg)
+
+
 |이름|GitHub|
 |---|---|
 |안준영|[@junyoii](https://github.com/junyoii)|
