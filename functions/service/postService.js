@@ -7,7 +7,7 @@ const FETCH_SIZE_POPULAR_POST = 10;
 
 const retrievePopularPosts = async (userId) => {
     let posts = await db.post.findAll({
-       attributes: ['id', 'thumbnail_url', 'title', 'order_count'],
+       attributes: ['id', 'thumbnail_url', 'title', 'order_count', 'price'],
        where: {
            deletedAt: null
        },
@@ -37,6 +37,7 @@ const retrievePopularPosts = async (userId) => {
             post_id: post.id,
             title: post.title,
             author: post.user.nickname,
+            price: post.price,
             thumbnail_url: post.thumbnail_url,
             is_purchased,
         }
@@ -56,7 +57,7 @@ const checkPostIsPurchased = async (userId, postId) => {
 
 const retrieveLatestPosts = async (userId, page, pageSize) => {
     const result = await db.post.findAndCountAll({
-        attributes: ['id', 'thumbnail_url', 'title', 'created_at'],
+        attributes: ['id', 'thumbnail_url', 'title', 'created_at', 'price'],
         where: {
             deletedAt: null
         },
@@ -100,6 +101,7 @@ const retrieveLatestPosts = async (userId, page, pageSize) => {
              title: post.title,
              author: post.user.nickname,
              thumbnail_url: post.thumbnail_url,
+             price: post.price,
              is_purchased,
              is_scraped,
          }
@@ -114,7 +116,7 @@ const retrieveLatestPosts = async (userId, page, pageSize) => {
 
 const retrieveRecommendationPosts = async (userId, page, pageSize) => {
     const result = await db.post.findAndCountAll({
-        attributes: ['id', 'thumbnail_url', 'title', 'created_at'],
+        attributes: ['id', 'thumbnail_url', 'title', 'created_at', 'price'],
         where: {
             deletedAt: null,
             recommended: true
@@ -159,6 +161,7 @@ const retrieveRecommendationPosts = async (userId, page, pageSize) => {
              title: post.title,
              author: post.user.nickname,
              thumbnail_url: post.thumbnail_url,
+             price: post.price,
              is_purchased,
              is_scraped,
          }

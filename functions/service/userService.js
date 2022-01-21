@@ -50,6 +50,7 @@ const getPostsByUserId = async (authorId, otherId, page, pageSize, sort, order) 
              post_id: post.id,
              title: post.title,
              thumbnail_url: post.thumbnail_url,
+             price:post.price,
              author: post.user.nickname,
              is_purchased,
              is_scraped,

@@ -37,6 +37,7 @@ const getScarpByUserId = async (userId, page, pageSize, sort, order) => {
          return {
              post_id: post.id,
              title: post.title,
+             price: post.price,
              thumbnail_url: post.thumbnail_url,
              is_purchased,
          }
