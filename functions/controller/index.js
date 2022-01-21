@@ -6,10 +6,10 @@ const userController = require('./userController');
 const authController = require('./authController');
 
 module.exports = {
-  postController,
-  areaController,
-  orderController,
-  scrapController,
-  userController,
-  authController,
+    postController,
+    areaController,
+    orderController,
+    scrapController,
+    userController,
+    authController,
 };
