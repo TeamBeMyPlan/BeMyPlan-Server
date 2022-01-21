@@ -44,7 +44,7 @@ github flow 사용
 
 
 ### ERD
-![image](https://user-images.githubusercontent.com/81547780/148912777-6f990228-f369-47e5-905a-d0064bdaabd7.png)
+![image](./images/비마플ERD.png)
 
 ### Dependency
 ```
@@ -99,8 +99,14 @@ bemyplan_server
           |- routes
       |- config
       |- constants
+      |- contorller
+      |- loaders
+      |- models
+      |- service
       |- lib
       |- db
+      |- utils
+      |- images
 ```
 
 ### Developers
