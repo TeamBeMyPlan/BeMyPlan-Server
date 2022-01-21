@@ -11,6 +11,7 @@ const tracing = require("@sentry/tracing")
 const statusCode = require("../constants/statusCode");
 const responseMessage = require("../constants/responseMessage");
 const util = require("../lib/util");
+const slackBot = require("../utils/slackBot");
 dotenv.config();
 
 const app = express();
@@ -42,8 +43,11 @@ app.use("/v1", require("./routes"));
 app.use(sentry.Handlers.errorHandler());
 
 app.use(function onError(err, req, res, next) {
-  res.status(statusCode.BAD_REQUEST)
-      .json(util.fail(statusCode.BAD_REQUEST, responseMessage.VALIDATION_EXCEPTION))
+    slackBot.send('api-서버-로그',
+        `오류가 발생했습니다 !\n\`Error Message\`: ${err.message}\n`).then();
+
+    res.status(statusCode.BAD_REQUEST)
+      .json(util.fail(statusCode.BAD_REQUEST, err.message))
 });
 
 app.use("*", (req, res) => {
