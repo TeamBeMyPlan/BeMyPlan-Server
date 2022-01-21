@@ -4,7 +4,7 @@ const pagination = require('../lib/pagination');
 
 const getPostsByUserId = async (authorId, otherId, page, pageSize, sort, order) => {
     const result = await db.post.findAndCountAll({
-        attributes: ['id', 'thumbnail_url', 'title', 'created_at'],
+        attributes: ['id', 'thumbnail_url', 'title', 'created_at', 'price', 'order_count'],
         where: {
             deletedAt: null,
             author_id: authorId
