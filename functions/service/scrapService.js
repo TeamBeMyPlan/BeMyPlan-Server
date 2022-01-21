@@ -59,12 +59,14 @@ const scrapPostByPostId = async (userId, postId) => {
                 }
             });
         } else {
-            await db.scrap.update({
-                deletedAt: null
+            await db.scrap.upsert({
+                deletedAt: null,
+                user_id: userId,
+                post_id: postId
             }, {
                 where: {
                     user_id: userId,
-                    post_id: postId
+                    post_id:postId
                 },
                 paranoid: false
             });
@@ -76,8 +78,7 @@ const scrapPostByPostId = async (userId, postId) => {
             deletedAt: null
         }
     });
-    const scrapped = scrapCount === 0 ? false : true;
-    console.log(scrapped);
+    const scrapped = scrapCount === 0 ? true : false;
     return {
         scrapped
     };
