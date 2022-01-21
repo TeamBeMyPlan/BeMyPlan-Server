@@ -7,7 +7,7 @@
 > 프로젝트 기간: 2022.01.02 ~ 2022.01.22
 
 ### API DOCS
-[be-my-plan-api-docs](https://wood-sandpaper-707.notion.site/API-bca655150dce4eb8bed070a4cad8c3df)
+[be-my-plan-api-docs](https://boggy-snowstorm-fdb.notion.site/ad40d48c650740d8bcc91f9abb8a2f21)
 
 ### Development Environment   
 <img src="https://img.shields.io/badge/Node.js-v16-green"/> <img src="https://img.shields.io/badge/PostgreSQL-v12.5-blue"/> <img src="https://img.shields.io/badge/Express-v4.17.2-green"/> <img src="https://img.shields.io/badge/Javascript-es6-yellow"/> <img src="https://img.shields.io/badge/firebase-yellow"/>   
