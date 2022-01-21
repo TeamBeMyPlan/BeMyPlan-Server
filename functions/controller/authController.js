@@ -20,7 +20,14 @@ const login = async (req, res) => {
     res.status(result.statusCode).json(result);
 }
 
+const checkNicknameDuplicate = async (req, res) => {
+    const { nickname } = req.body;
+    const result = await authService.checkNicknameDuplicate(nickname);
+    res.status(statusCode.OK).json(util.success(result));
+}
+
 module.exports = {
     signUp,
     login,
+    checkNicknameDuplicate,
 };
