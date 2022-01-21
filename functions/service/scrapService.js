@@ -18,11 +18,11 @@ const getScarpByUserId = async (userId, page, pageSize, sort, order) => {
         limit: pageSize,
         raw: true,
     });
-    const totalCount = (await posts).count;
+    const totalCount = posts.count;
     const totalPage = pagination.getTotalPage(totalCount, pageSize)
 
     return {
-        items: (await posts).rows,
+        items: posts.rows,
         totalPage: parseInt(totalPage)
     };
 }

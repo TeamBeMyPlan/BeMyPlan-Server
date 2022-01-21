@@ -35,10 +35,13 @@ const getPostsByUserId = async (authorId, otherId, page, pageSize, sort, order) 
         offset: page * pageSize,
         limit: pageSize,
     });
+
     const totalCount = (await result).count;
+
     const totalPage = pagination.getTotalPage(totalCount, pageSize);
     
     let posts = (await result).rows;
+
 
      posts = posts.map(post => {
          const is_purchased = (post.orders.length) > 0 ? true : false;
