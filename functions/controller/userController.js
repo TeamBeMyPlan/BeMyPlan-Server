@@ -5,13 +5,14 @@ const { userService } = require('../service');
 
 const getPostsByUserId = async (req, res) => {
     const { userId } = req.params;
+    const { otherId } = req.query;
     const page = req.params.page || 0;
     const pageSize = req.params.pageSize || 10;
     const sort = req.query.sort || 'createdAt';
     const order = req.query.order || 'DESC';
 
     try {
-        return res.status(statusCode.OK).json(util.success(await userService.getPostsByUserId(userId, page, pageSize, sort, order)));
+        return res.status(statusCode.OK).json(util.success(await userService.getPostsByUserId(userId,otherId, page, pageSize, sort, order)));
         //TODO: 구매여부도 함께 넘겨주기!
     } catch (e) {
         console.log(e);

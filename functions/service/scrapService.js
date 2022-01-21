@@ -39,7 +39,6 @@ const scrapPostByPostId = async (userId, postId) => {
             });
         } else {
             await db.scrap.update({
-                //todo 업데이트 + 크레이트
                 deletedAt: null
             }, {
                 where: {
