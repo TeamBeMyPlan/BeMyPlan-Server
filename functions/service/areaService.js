@@ -22,7 +22,7 @@ const getAllAreas = async () => {
 
 const getAllPostsByArea = async(areaId, userId, page, pageSize, sort, order) => {
   const result = await db.post.findAndCountAll({
-    attributes: ['id', 'thumbnail_url', 'price', 'title', 'created_at', ],
+    attributes: ['id', 'thumbnail_url', 'price', 'title', 'created_at', 'price', 'order_count' ],
     where: {
         deletedAt: null,
         area_id: areaId
@@ -50,7 +50,7 @@ const getAllPostsByArea = async(areaId, userId, page, pageSize, sort, order) => 
          required: false
      },
  ],
-     order: [['created_at', 'DESC']],
+     order: [[sort, 'DESC']],
      offset: page * pageSize,
      limit: 10
  });
