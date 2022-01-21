@@ -4,6 +4,13 @@ module.exports = {
         data
       };
     },
+    successRes: (statusCode, message, data) => {
+        return {
+            statusCode,
+            message,
+            data
+        };
+    },
     fail: (statusCode, message) => {
       return {
         statusCode,
