@@ -44,7 +44,7 @@ github flow 사용
 
 
 ### ERD
-![image](./images/비마플ERD.png)
+![image](![비마플 ERD](https://user-images.githubusercontent.com/81547780/150499866-478d7819-ab2e-44ce-ac30-c2afab50bfa0.PNG))
 
 ### Dependency
 ```
