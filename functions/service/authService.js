@@ -64,7 +64,20 @@ const login = async (socialType, socialToken) => {
     }
 }
 
+const checkNicknameDuplicate = async (nickname) => {
+    const user = await db.user.findOne({
+        attributes: ['id'],
+        where: {
+            nickname: nickname
+        }
+    });
+    return {
+        duplicated: user !== null
+    }
+}
+
 module.exports = {
     signUp,
     login,
+    checkNicknameDuplicate,
 }
