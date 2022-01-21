@@ -2,29 +2,49 @@ const db = require('../models');
 const pagination = require('../lib/pagination');
 
 const getScarpByUserId = async (userId, page, pageSize, sort, order) => {
-    const posts = await db.scrap.findAndCountAll({
-        attributes: ['post.id', 'post.thumbnail_url', 'post.title', 'post.price'],
+    const result = await db.post.findAndCountAll({
+        attributes: ['id', 'thumbnail_url', 'title', 'price', 'created_at', 'order_count'],
         where: {
-            user_id: userId,
+            deletedAt: null
         },
         include: [
             {
-                model: db.post,
-                attributes: []
-            }
+                model: db.scrap,
+                where: {
+                    user_id: userId
+                }
+            },
+            {
+                model: db.order,
+                where: {
+                    user_id: userId
+                },
+                attributes: ['id']
+            },
         ],
         order: [[sort, order]],
         offset: page * pageSize,
         limit: pageSize,
-        raw: true,
     });
-    const totalCount = posts.count;
+
+    const totalCount = (await result).count;
     const totalPage = pagination.getTotalPage(totalCount, pageSize)
 
-    return {
-        items: posts.rows,
+    let posts = (await result).rows;
+
+     posts = posts.map(post => {
+         const is_purchased = (post.orders.length) > 0 ? true : false;
+         return {
+             post_id: post.id,
+             title: post.title,
+             thumbnail_url: post.thumbnail_url,
+             is_purchased,
+         }
+     })
+     return {
+        items: posts,
         totalPage: parseInt(totalPage)
-    };
+      };
 }
 
 const scrapPostByPostId = async (userId, postId) => {
