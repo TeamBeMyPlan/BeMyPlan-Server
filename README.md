@@ -1,6 +1,7 @@
 # Bemyplan-Server  
-### 내 취향에 맞는 여행 서비스, Be My Plan
 
+![Frame 3](https://user-images.githubusercontent.com/81547780/150544152-fe76acf4-c514-4468-90f6-c33d81f50055.png)
+![Frame 1](https://user-images.githubusercontent.com/81547780/150544146-4db4b8c8-4e17-4d06-9d5a-ed6d532f3287.png)
 
 > SOPT 29th APPJAM </b>
 >
@@ -11,6 +12,10 @@
 
 ### Development Environment   
 <img src="https://img.shields.io/badge/Node.js-v16-green"/> <img src="https://img.shields.io/badge/PostgreSQL-v12.5-blue"/> <img src="https://img.shields.io/badge/Express-v4.17.2-green"/> <img src="https://img.shields.io/badge/Javascript-es6-yellow"/> <img src="https://img.shields.io/badge/firebase-yellow"/>   
+
+### 핵심 기능
+![비마플 ia](https://user-images.githubusercontent.com/81547780/150542456-d1386db9-d54f-4c9f-9ba3-72da8b3558ea.jpg)
+
 
 ### Branch Strategy
 
