@@ -4,7 +4,7 @@ const responseMessage = require('../constants/responseMessage');
 const { scrapService } = require('../service');
 
 const getScarpByUserId = async (req, res) => {
-  const { userId } = req.params;
+  const userId = 3
   const page = req.params.page || 0;
   const pageSize = req.params.pageSize || 10;
   const sort = req.query.sort || 'createdAt';
@@ -21,7 +21,7 @@ const getScarpByUserId = async (req, res) => {
 
 const scrapPostByPostId = async (req, res) => {
     const { postId } = req.params;
-    const { userId } = req.query; // TODO: 토큰으로 변경
+    const userId = 3; // TODO: 토큰으로 변경
     try {
         return res.status(statusCode.OK).json(util.success(await scrapService.scrapPostByPostId(userId, postId)));
     } catch (e) {

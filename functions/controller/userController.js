@@ -4,8 +4,8 @@ const responseMessage = require('../constants/responseMessage');
 const { userService } = require('../service');
 
 const getPostsByUserId = async (req, res) => {
-    const { userId } = req.params;
-    const { otherId } = req.query;
+    const { userId } = req.params
+    const  otherId = 3;
     const page = req.params.page || 0;
     const pageSize = req.params.pageSize || 10;
     const sort = req.query.sort || 'createdAt';

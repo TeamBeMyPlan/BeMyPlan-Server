@@ -5,7 +5,7 @@ const { postService } = require('../service');
 
 const retrievePopularPosts = async (req, res) => {
     try {
-        const { userId } = req.params;
+        const userId = 3
         return res.status(statusCode.OK).json(util.success(await postService.retrievePopularPosts(userId)));
     } catch (e) {
         console.log(e);
@@ -18,7 +18,7 @@ const retrieveLatestPosts = async (req, res) => {
     const pageSize = req.query.pageSize || 5;
     //TODO 토큰에서 유저 정보 확인한 뒤, 서비스 함수 호출할 때 함께 넘겨 각 게시글에 대한 구매 여부 확인(boolean) 함께 넘겨줘야 함.
     try {
-        const { userId } = req.params;
+        const userId = 3
         return res.status(statusCode.OK).json(util.success(await postService.retrieveLatestPosts(userId, page, pageSize)));
     } catch (e) {
         console.log(e);
@@ -31,7 +31,7 @@ const retrieveRecommendationPosts = async (req, res) => {
     const pageSize = req.query.pageSize || 5;
     //TODO 토큰에서 유저 정보 확인한 뒤, 서비스 함수 호출할 때 함께 넘겨 각 게시글에 대한 구매 여부 확인(boolean) 함께 넘겨줘야 함.
     try {
-        const { userId }= req.params
+        const userId= 3
         return res.status(statusCode.OK).json(util.success(await postService.retrieveRecommendationPosts( userId, page, pageSize)));
     } catch (e) {
         console.log(e);
@@ -71,7 +71,7 @@ const retrievePreviewTags = async (req, res) => {
 
 const retrievePostsByRandom = async (req, res) => {
     try {
-        const { userId } = req.params;
+        const userId = 3
         return res.status(statusCode.OK).json(util.success(await postService.retrievePostsByRandom(userId)));
     } catch (e) {
         console.log(e);
