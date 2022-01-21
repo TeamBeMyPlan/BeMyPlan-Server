@@ -16,6 +16,16 @@
 ### 핵심 기능
 ![비마플 ia](https://user-images.githubusercontent.com/81547780/150542456-d1386db9-d54f-4c9f-9ba3-72da8b3558ea.jpg)
 
+<details>
+<summary>핵심 기능 사진</summary>
+<div markdown="1">
+      
+![과제2](https://user-images.githubusercontent.com/81547780/150545649-0b53dc7a-9051-4672-8e3d-690ee9f392b3.PNG)
+
+![과제사진1](https://user-images.githubusercontent.com/81547780/150545610-a71fc489-aeea-43d0-a29c-8905160cd903.PNG)
+
+</div>
+</details>
 
 ### Branch Strategy
 
